@@ -1,3 +1,7 @@
+import Git from "nodegit";
+
 export default () => {
-  console.log("Hello babel world");
+  Git.Repository.open(".").then(repo =>
+    repo.getBranch("master").then(branch => console.log(branch.name()))
+  );
 };
