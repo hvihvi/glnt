@@ -1,0 +1,26 @@
+{
+  "name": "gint",
+  "version": "1.0.0",
+  "description": "Linter for Git",
+  "main": "./index.js",
+  "bin": {
+    "gint": "./bin/gint.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hvihvi/gint.git"
+  },
+  "keywords": [
+    "git",
+    "lint"
+  ],
+  "author": "hvihvi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hvihvi/gint/issues"
+  },
+  "homepage": "https://github.com/hvihvi/gint#readme"
+}
