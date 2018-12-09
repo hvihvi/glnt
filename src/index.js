@@ -1,7 +1,5 @@
-import Git from "nodegit";
+import readCommit from "./git/readCommit";
 
 export default () => {
-  Git.Repository.open(".").then(repo =>
-    repo.getBranch("master").then(branch => console.log(branch.name()))
-  );
+  readCommit();
 };

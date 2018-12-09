@@ -36,6 +36,7 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "minimatch": "^3.0.4",
     "nodegit": "^0.23.0"
   },
   "resolutions": {
