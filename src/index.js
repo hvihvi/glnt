@@ -1,5 +1,5 @@
-import readCommit from "./git/readCommit";
+import applyRules from "./rules";
 
 export default () => {
-  readCommit();
+  applyRules();
 };

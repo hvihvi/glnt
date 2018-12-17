@@ -1,5 +1,5 @@
 import minimatch from "minimatch";
-import config from "../config/config";
+import config from "../config";
 
 // patches.forEach(patch =>
 //   console.log(
@@ -17,10 +17,10 @@ export const countMatchingFiles = (patches, pattern) => {
 };
 
 const hasModifiedTests = patches =>
-  countMatchingFiles(patches, config.shouldHaveTest.test) > 0;
+  countMatchingFiles(patches, config.shouldHaveTests.test) > 0;
 
 const hasModifiedFiles = patches =>
-  countMatchingFiles(patches, config.shouldHaveTest.subject) > 0;
+  countMatchingFiles(patches, config.shouldHaveTests.subject) > 0;
 
 const hasMissingTests = patches =>
   hasModifiedFiles(patches) && !hasModifiedTests(patches);

@@ -1,4 +1,5 @@
 # gint
+
 A Linter for Git
 
 # Usage
@@ -16,14 +17,16 @@ Checks if the diff has code modifications. If so, it should also have test modif
 You can override the code files and test files in the .gintrc file (`//TODO`, currently hardcoded in src/config/config.js)
 
 For example a javascript project would use the following config :
+
 ```json
 {
-  shouldHaveTest: {
-    subject: "**/*.js",
-    test: "**/*.test.js"
+  "shouldHaveTests": {
+    "subject": "**/*.js",
+    "test": "**/*.test.js"
   }
 }
 ```
+
 It ensures that any code modification to a `**/*.js` file also has a modification to a `**/*.test.js` file.
 
 `//TODO Feature : Make the code filename match the test filename?`
@@ -33,8 +36,9 @@ It ensures that any code modification to a `**/*.js` file also has a modificatio
 ## [TODO] Should have properly formatter commit message
 
 Checks if the commit message has the right format:
-* Line separator between header and body
-* Character lenght per line of header and/or body
+
+- Line separator between header and body
+- Character lenght per line of header and/or body
 
 Checks if the commit message contains tags (for example "should contain related jira issue #JIRA-123")
 
@@ -45,6 +49,7 @@ Checks if the current HEAD merges with all remote branches matching a pattern
 # Dev
 
 The CLI can be executed via
+
 ```sh
 ./bin/gint.js
 ```
