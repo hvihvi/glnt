@@ -25,10 +25,11 @@ const hasModifiedFiles = patches =>
 const hasMissingTests = patches =>
   hasModifiedFiles(patches) && !hasModifiedTests(patches);
 
-export default patches => {
+export default (commit, patches) => {
+  // TODO pass commit, to display commit.sha()
   if (hasMissingTests(patches)) {
     console.log(
-      "[Missing Test] You modified source files without modifying a test, is a test missing?"
+      `[Missing Test][${commit.sha()}] You modified source files without modifying a test, is a test missing?`
     );
   }
 };

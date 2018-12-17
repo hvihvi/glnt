@@ -7,6 +7,6 @@ export const isBadMessage = message => {
 
 export default commit => {
   if (isBadMessage(commit.message())) {
-    console.log("[Bad Message] Please rewrite commit message");
+    console.log(`[Bad Message][${commit.sha()}] Please rewrite commit message`);
   }
 };
