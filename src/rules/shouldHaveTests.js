@@ -1,5 +1,5 @@
-import minimatch from "minimatch";
-import config from "../config";
+const minimatch = require("minimatch");
+const config = require("../config").config;
 
 // patches.forEach(patch =>
 //   console.log(
@@ -9,8 +9,7 @@ import config from "../config";
 //   )
 // )
 
-// Visible for testing
-export const countMatchingFiles = (patches, pattern) => {
+const countMatchingFiles = (patches, pattern) => {
   return patches
     .map(patch => patch.oldFile().path())
     .filter(filename => minimatch(filename, pattern)).length;
@@ -25,11 +24,17 @@ const hasModifiedFiles = patches =>
 const hasMissingTests = patches =>
   hasModifiedFiles(patches) && !hasModifiedTests(patches);
 
-export default (commit, patches) => {
+const shouldHaveTests = (commit, patches) => {
   // TODO pass commit, to display commit.sha()
   if (hasMissingTests(patches)) {
     console.log(
       `[Missing Test][${commit.sha()}] You modified source files without modifying a test, is a test missing?`
     );
   }
+};
+
+module.exports = {
+  // Visible for testing
+  countMatchingFiles,
+  shouldHaveTests
 };

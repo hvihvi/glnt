@@ -1,12 +1,17 @@
-// Visible for testing
-export const isBadMessage = message => {
+const isBadMessage = message => {
   console.log(message.split[1]);
   // TODO
   return true;
 };
 
-export default commit => {
+const shouldHaveFormattedMessage = commit => {
   if (isBadMessage(commit.message())) {
     console.log(`[Bad Message][${commit.sha()}] Please rewrite commit message`);
   }
+};
+
+module.exports = {
+  // Visible for testing
+  isBadMessage,
+  shouldHaveFormattedMessage
 };

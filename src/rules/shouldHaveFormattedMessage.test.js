@@ -1,4 +1,4 @@
-import { isBadMessage } from "./shouldHaveFormattedMessage";
+const { isBadMessage } = require("./shouldHaveFormattedMessage");
 
 it("Should have line separator between header and body", () => {
   // given

@@ -1,6 +1,6 @@
-import Git from "nodegit";
+const Git = require("nodegit");
 
-export const onEachCommit = callback => {
+const onEachCommit = callback => {
   Git.Repository.open(".")
     .then(repo => repo.getHeadCommit())
     .then(headCommit => {
@@ -12,7 +12,7 @@ export const onEachCommit = callback => {
     .done();
 };
 
-export const onEachCommitPatches = callback => {
+const onEachCommitPatches = callback => {
   onEachCommit(commit =>
     commit.getDiff().done(function(diffList) {
       diffList.forEach(diff =>
@@ -20,4 +20,9 @@ export const onEachCommitPatches = callback => {
       );
     })
   );
+};
+
+module.exports = {
+  onEachCommit,
+  onEachCommitPatches
 };

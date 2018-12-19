@@ -1,5 +1,9 @@
-import applyRules from "./rules";
+const rules = require("./rules");
 
-export default () => {
-  applyRules();
+const run = () => {
+  rules.applyRules();
+};
+
+module.exports = {
+  run
 };

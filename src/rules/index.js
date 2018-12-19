@@ -1,7 +1,7 @@
-import { onEachCommit, onEachCommitPatches } from "../git/index";
-import config from "../config/index";
-import shouldHaveTests from "./shouldHaveTests";
-import shouldHaveFormattedMessage from "./shouldHaveFormattedMessage";
+const { onEachCommit, onEachCommitPatches } = require("../git/index");
+const config = require("../config/index").config;
+const shouldHaveTests = require("./shouldHaveTests").shouldHaveTests;
+const shouldHaveFormattedMessage = require("./shouldHaveFormattedMessage").shouldHaveFormattedMessage;
 
 const applyRules = () => {
   console.log("[DEBUG] Applying rules");
@@ -13,4 +13,4 @@ const applyRules = () => {
   }
 };
 
-export default applyRules;
+module.exports = { applyRules };

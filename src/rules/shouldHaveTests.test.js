@@ -1,4 +1,4 @@
-import { countMatchingFiles } from "./shouldHaveTests";
+const { countMatchingFiles } = require("./shouldHaveTests");
 
 it("should count matched patterns", () => {
   // given

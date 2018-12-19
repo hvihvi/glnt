@@ -7,9 +7,6 @@
     "gint": "./bin/gint.js"
   },
   "scripts": {
-    "clean": "rm -rf lib",
-    "build": "babel src --out-dir lib",
-    "watch": "nodemon --watch src --exec yarn build",
     "test": "jest --testRegex src/**/*.test.js --watch"
   },
   "repository": {
@@ -27,19 +24,11 @@
   },
   "homepage": "https://github.com/hvihvi/gint#readme",
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "@babel/core": "^7.2.0",
-    "@babel/node": "^7.2.0",
-    "@babel/preset-env": "^7.2.0",
-    "babel-jest": "^23.6.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.7"
   },
   "dependencies": {
     "minimatch": "^3.0.4",
     "nodegit": "^0.23.0"
-  },
-  "resolutions": {
-    "babel-core": "7.0.0-bridge.0"
   }
 }

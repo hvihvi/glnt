@@ -1,4 +1,4 @@
-export default {
+const config = {
   shouldHaveTests: {
     enabled: true,
     subject: "**/*.js",
@@ -8,3 +8,5 @@ export default {
     enabled: true
   }
 };
+
+module.exports = { config };

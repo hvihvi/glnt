@@ -1,2 +1,3 @@
 #!/usr/bin/env node
-require("../lib/").default();
+
+require("../src/index.js").run();
