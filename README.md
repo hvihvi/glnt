@@ -33,6 +33,8 @@ It ensures that any code modification to a `**/*.js` file also has a modificatio
 
 `//TODO Feature : check every commits between origin/master (configurable) and current HEAD`
 
+`//TODO Feature : disable flag à rajouter dans le message de commit pour disable une rule (exemple de config : {shouldHaveTests: {disableMessage: "#NOTEST"})`
+
 ## [TODO] Should have properly formatter commit message
 
 Checks if the commit message has the right format:
