@@ -1,12 +1,14 @@
-const isBadMessage = message => {
-  console.log(message.split[1]);
+const git = require("../git");
+
+const isBadMessage = msg => {
   // TODO
   return true;
 };
 
-const shouldHaveFormattedMessage = commit => {
-  if (isBadMessage(commit.message())) {
-    console.log(`[Bad Message][${commit.sha()}] Please rewrite commit message`);
+const shouldHaveFormattedMessage = async commit => {
+  const msg = await git.getCommitMessage(commit);
+  if (isBadMessage(msg)) {
+    console.log(`[${commit}] Should have formatted message : ${msg}`);
   }
 };
 

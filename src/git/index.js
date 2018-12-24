@@ -30,9 +30,13 @@ const findCommonAncestor = async (branch1, branch2) => {
 const listCommits = async (base, head) =>
   util.git(`rev-list ${base}..${head}`).then(str => util.toLineArray(str));
 
+const getCommitMessage = sha1 =>
+  util.git(`show -s --format=%B ${sha1}`).then(msg => msg.trim());
+
 module.exports = {
   onEachCommit,
   onEachCommitPatches,
   findCommonAncestor,
-  listCommits
+  listCommits,
+  getCommitMessage
 };
