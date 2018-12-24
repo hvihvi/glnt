@@ -6,7 +6,8 @@ const config = {
     test: "**/*.test.js"
   },
   shouldHaveFormattedMessage: {
-    enabled: true
+    enabled: true,
+    charactersPerLine: 80
   }
 };
 
