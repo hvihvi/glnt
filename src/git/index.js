@@ -27,8 +27,12 @@ const findCommonAncestor = async (branch1, branch2) => {
   return util.exec(`git merge-base ${branch1} ${branch2}`);
 };
 
+const listCommits = async (base, head) =>
+  util.exec(`git rev-list ${base}..${head}`).then(str => util.toLineArray(str));
+
 module.exports = {
   onEachCommit,
   onEachCommitPatches,
-  findCommonAncestor
+  findCommonAncestor,
+  listCommits
 };

@@ -6,6 +6,12 @@ const exec = async cmd => {
   return stdout;
 };
 
+/**
+ * To array of lines, removes empty strings
+ */
+const toLineArray = str => str.split("\n").filter(s => s !== "");
+
 module.exports = {
-  exec
+  exec,
+  toLineArray
 };
