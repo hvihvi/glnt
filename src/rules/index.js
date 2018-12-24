@@ -4,7 +4,9 @@ const shouldHaveTests = require("./shouldHaveTests").shouldHaveTests;
 const shouldHaveFormattedMessage = require("./shouldHaveFormattedMessage")
   .shouldHaveFormattedMessage;
 
-const applyRules = () => {
+const applyRules = async () => {
+  const ancestor = await git.findCommonAncestor("HEAD", config.origin);
+  console.log("ancestor:" + ancestor);
   console.log("[DEBUG] Applying rules");
   if (config.shouldHaveTests.enabled) {
     git.onEachCommitPatches(shouldHaveTests);
