@@ -11,7 +11,7 @@ const git = cmd => exec("git " + cmd);
 /**
  * To array of lines, removes empty strings
  */
-const toLineArray = str => str.split("\n").filter(s => s === "");
+const toLineArray = str => str.split("\n").filter(s => s !== "");
 
 module.exports = {
   exec,

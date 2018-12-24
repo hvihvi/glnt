@@ -24,7 +24,7 @@ const onEachCommitPatches = callback => {
 };
 
 const findCommonAncestor = async (branch1, branch2) => {
-  return util.git(`merge-base ${branch1} ${branch2}`);
+  return util.git(`merge-base ${branch1} ${branch2}`).then(sha1 => sha1.trim());
 };
 
 const listCommits = async (base, head) =>

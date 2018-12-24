@@ -7,7 +7,7 @@ const config = require("../config/index").config;
 const applyRules = async () => {
   const ancestor = await git.findCommonAncestor("HEAD", config.origin);
   console.log("ancestor:" + ancestor);
-  const commits = await git.listCommits(config.origin, "HEAD~5");
+  const commits = await git.listCommits(ancestor, "HEAD");
   console.log(commits);
   // if (config.shouldHaveTests.enabled) {
   //   git.onEachCommitPatches(shouldHaveTests);
