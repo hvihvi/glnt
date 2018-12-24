@@ -1,6 +1,5 @@
 const Git = require("nodegit");
-const util = require("util");
-const exec = require("child_process").exec;
+const util = require("./util");
 
 const onEachCommit = callback => {
   Git.Repository.open(".")
@@ -25,10 +24,7 @@ const onEachCommitPatches = callback => {
 };
 
 const findCommonAncestor = async (branch1, branch2) => {
-  const { stdout } = await util.promisify(exec)(
-    `git merge-base ${branch1} ${branch2}`
-  );
-  return stdout;
+  return util.exec(`git merge-base ${branch1} ${branch2}`);
 };
 
 module.exports = {
