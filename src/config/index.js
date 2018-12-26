@@ -9,7 +9,7 @@ const config = {
   shouldHaveFormattedMessage: {
     enabled: true,
     level: "ERROR",
-    charactersPerLine: 80
+    charactersPerLine: 72
   }
 };
 

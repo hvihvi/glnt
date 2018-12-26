@@ -4,17 +4,34 @@ A Linter for Git
 
 # Usage
 
+CLI :
+
 ```sh
 gint
 ```
 
+Outputs warning or error messages to the console if any rules are broken.
+
 # Features
+
+## Should have properly formatter commit message
+
+Checks if the commit message has the right format:
+
+- Line separator between header and body
+- Character lenght per line of header and/or body
+
+Checks if the commit message contains tags (for example should contain related jira issue "#JIRA-123")  
+
+Checks if the commit message does not contain tags (for example should not contain "WIP")
+
+`//TODO: ` Add more rules based on good practices such as those listed in (https://chris.beams.io/posts/git-commit/) (https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing)
 
 ## Should have tests
 
-Checks if the diff has code modifications. If so, it should also have test modifications
+Checks if the diff in a commit has code modifications. If so, it should also have test modifications, or a justification for not having tests in the commit message.
 
-You can override the code files and test files in the .gintrc file (`//TODO`, currently hardcoded in src/config/config.js)
+You can define the code files and test files in the .gintrc file (`//TODO`, currently hardcoded in src/config/config.js)
 
 For example a javascript project would use the following config :
 
@@ -35,18 +52,11 @@ It ensures that any code modification to a `**/*.js` file also has a modificatio
 
 `//TODO Feature : disable flag à rajouter dans le message de commit pour disable une rule (exemple de config : {shouldHaveTests: {disableMessage: "#NOTEST"})`
 
-## [TODO] Should have properly formatter commit message
+## [TODO] Should merge with remote branches
 
-Checks if the commit message has the right format:
+- Checks if the current HEAD merges with origin (default: "origin/master")
+- Checks if the current HEAD merges with all remote branches matching a pattern
 
-- Line separator between header and body
-- Character lenght per line of header and/or body
-
-Checks if the commit message contains tags (for example "should contain related jira issue #JIRA-123")
-
-## [TODO] Should merge with all remote branches
-
-Checks if the current HEAD merges with all remote branches matching a pattern
 
 # Dev
 
