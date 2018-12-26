@@ -1,5 +1,6 @@
 const minimatch = require("minimatch");
-const config = require("../config").config;
+const config = require("../config").config.shouldHaveTests;
+const logger = require("../logger");
 
 // patches.forEach(patch =>
 //   console.log(
@@ -16,10 +17,10 @@ const countMatchingFiles = (patches, pattern) => {
 };
 
 const hasModifiedTests = patches =>
-  countMatchingFiles(patches, config.shouldHaveTests.test) > 0;
+  countMatchingFiles(patches, config.test) > 0;
 
 const hasModifiedFiles = patches =>
-  countMatchingFiles(patches, config.shouldHaveTests.subject) > 0;
+  countMatchingFiles(patches, config.subject) > 0;
 
 const hasMissingTests = patches =>
   hasModifiedFiles(patches) && !hasModifiedTests(patches);
@@ -27,8 +28,9 @@ const hasMissingTests = patches =>
 const shouldHaveTests = (commit, patches) => {
   // TODO pass commit, to display commit.sha()
   if (hasMissingTests(patches)) {
-    console.log(
-      `[Missing Test][${commit.sha()}] You modified source files without modifying a test, is a test missing?`
+    logger.log(
+      `[Missing Test][${commit.sha()}] You modified source files without modifying a test, is a test missing?`,
+      config.level
     );
   }
 };

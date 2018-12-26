@@ -1,9 +1,11 @@
 const git = require("../git");
-const config = require("../config").config;
+const config = require("../config").config.shouldHaveFormattedMessage;
+const logger = require("../logger");
 
 const isBadMessage = msg => {
   return shouldHaveSeparatorLine(msg) || shouldHaveNCharPerLine(msg);
 };
+
 const shouldHaveSeparatorLine = msg => {
   const lines = msg.split("\n");
   return lines.length > 1 && lines[1] !== "";
@@ -12,15 +14,17 @@ const shouldHaveSeparatorLine = msg => {
 const shouldHaveNCharPerLine = msg => {
   const lines = msg.split("\n");
   return (
-    lines.filter(
-      line => line.length > config.shouldHaveFormattedMessage.charactersPerLine
-    ).length > 0
+    lines.filter(line => line.length > config.charactersPerLine).length > 0
   );
 };
+
 const shouldHaveFormattedMessage = async commit => {
   const msg = await git.getCommitMessage(commit);
   if (isBadMessage(msg)) {
-    console.log(`[${commit}] Should have formatted message : ${msg}`);
+    logger.log(
+      `[${commit}] Should have formatted message : ${msg}`,
+      config.level
+    );
   }
 };
 

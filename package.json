@@ -40,6 +40,7 @@
     "prettier": "^1.15.3"
   },
   "dependencies": {
+    "chalk": "^2.4.1",
     "minimatch": "^3.0.4",
     "nodegit": "^0.23.0"
   }
