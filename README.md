@@ -56,7 +56,7 @@ It ensures that any code modification to a `**/*.js` file also has a modificatio
 
 - Checks if the current HEAD merges with origin (default: "origin/master")
 - Checks if the current HEAD merges with all remote branches matching a pattern
-
+`TODO: something like git merge --no-commit --no-ff ${origin}; git merge --abort; echo "Merge aborted";`
 
 # Dev
 
