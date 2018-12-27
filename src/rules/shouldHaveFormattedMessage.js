@@ -8,21 +8,24 @@ const isBadMessage = msg => {
 
 const shouldHaveSeparatorLine = msg => {
   const lines = msg.split("\n");
-  return lines.length > 1 && lines[1] !== "";
+  if (lines.length > 1 && lines[1] !== "") {
+    return true;
+  } else return false;
 };
 
 const shouldHaveNCharPerLine = msg => {
   const lines = msg.split("\n");
-  return (
-    lines.filter(line => line.length > config.charactersPerLine).length > 0
-  );
+  if (lines.filter(line => line.length > config.charactersPerLine).length > 0) {
+    return true;
+  } else return false;
 };
 
 const shouldHaveFormattedMessage = async commit => {
   const msg = await git.getCommitMessage(commit);
+  const shortHash = await git.toShortHash(commit);
   if (isBadMessage(msg)) {
     logger.log(
-      `[${commit}] Should have formatted message : ${msg}`,
+      `[${shortHash}] Should have formatted message : ${msg}`,
       config.level
     );
   }

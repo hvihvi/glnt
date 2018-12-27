@@ -33,10 +33,14 @@ const listCommits = async (base, head) =>
 const getCommitMessage = sha1 =>
   util.git(`show -s --format=%B ${sha1}`).then(msg => msg.trim());
 
+const toShortHash = sha1 =>
+  util.git(`rev-parse --short ${sha1}`).then(result => result.trim());
+
 module.exports = {
   onEachCommit,
   onEachCommitPatches,
   findCommonAncestor,
   listCommits,
-  getCommitMessage
+  getCommitMessage,
+  toShortHash
 };
