@@ -2,9 +2,12 @@ const git = require("../git");
 const config = require("../config").config.shouldHaveFormattedMessage;
 const logger = require("../logger");
 
-const shouldHaveSeparatorLine = (msg, commit) => {
+const hasSeparatorLine = msg => {
   const lines = msg.split("\n");
-  if (lines.length > 1 && lines[1] !== "") {
+  return lines.length > 1 && lines[1] !== "";
+};
+const shouldHaveSeparatorLine = (msg, commit) => {
+  if (hasSeparatorLine(msg)) {
     logger.logWithSha1(
       `Commit message should have a separator line between header and body`,
       config.level,
@@ -14,9 +17,12 @@ const shouldHaveSeparatorLine = (msg, commit) => {
   } else return false;
 };
 
-const shouldHaveNCharPerLine = (msg, commit) => {
+const hasNCharPerLine = msg => {
   const lines = msg.split("\n");
-  if (lines.filter(line => line.length > config.charactersPerLine).length > 0) {
+  return lines.some(line => line.length > config.charactersPerLine);
+};
+const shouldHaveNCharPerLine = (msg, commit) => {
+  if (hasNCharPerLine(msg)) {
     // TODO extract condition, no log in unit tests
     logger.logWithSha1(
       `Commit message should be wrapped to ${
@@ -38,7 +44,7 @@ const shouldHaveFormattedMessage = async commit => {
 module.exports = {
   shouldHaveFormattedMessage,
   // Visible for testing
-  shouldHaveSeparatorLine,
+  hasSeparatorLine,
   // Visible for testing
-  shouldHaveNCharPerLine
+  hasNCharPerLine
 };
