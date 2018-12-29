@@ -22,8 +22,8 @@ const shouldHaveNCharPerLine = msg => {
 
 const shouldHaveFormattedMessage = async commit => {
   const msg = await git.getCommitMessage(commit);
-  const shortHash = await git.toShortHash(commit);
   if (isBadMessage(msg)) {
+    const shortHash = await git.toShortHash(commit);
     logger.log(
       `[${shortHash}] Should have formatted message : ${msg}`,
       config.level
