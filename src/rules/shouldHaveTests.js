@@ -21,9 +21,12 @@ const hasUntestedTag = message => message.includes(config.untestedTag);
 const shouldHaveTests = async commit => {
   const filenames = await git.getCommitFiles(commit);
   const message = await git.getCommitMessage(commit);
-  if (hasUntestedTag(message) && hasMissingTests(filenames)) {
+  if (!hasUntestedTag(message) && hasMissingTests(filenames)) {
     logger.logWithSha1(
-      `You modified source files without modifying a test, is a test missing?`,
+      `You modified source files without modifying a test. Is this code not tested?
+Note: You can use "${
+        config.untestedTag
+      }" in the commit message to bypass this rule`,
       config.level,
       commit
     );

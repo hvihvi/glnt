@@ -32,22 +32,25 @@ Outputs warning or error messages to the console if any rules are broken.
 
 - Checks if the diff in a commit has code modifications. If so, it should also have test modifications, or a justification for not having tests in the commit message.
 
-You can define the code files and test files in the .gintrc file (`//TODO`, currently hardcoded in src/config/config.js)
+You can define the code files and test files in the `.gintrc` file (`//TODO`, currently hardcoded in src/config/config.js)
 
-For example a javascript project would use the following config :
+This is the default config :
 
 ```json
 {
   "shouldHaveTests": {
+    "enabled": true,
+    "level": "INFO",
     "subject": "**/*.js",
-    "test": "**/*.test.js"
+    "test": "**/*.test.js",
+    "untestedTag": "#untested"
   }
 }
 ```
 
 It ensures that any code modification to a `**/*.js` file also has a modification to a `**/*.test.js` file.
 
-- TODO Checks if the commit message contains #notest (configurable tag), that way if a part of the code is untested, the commit message should try to provide an explanation.
+- Checks if the commit message contains #untested (configurable tag), that way if a part of the code is untested, the commit message should try to provide an explanation.
 
 - TODO make the code filename match test filename
 

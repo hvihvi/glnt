@@ -1,5 +1,5 @@
 const config = {
-  origin: "HEAD~10",
+  origin: "HEAD~20",
   shouldHaveTests: {
     enabled: true,
     level: "INFO",
