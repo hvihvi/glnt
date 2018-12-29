@@ -41,7 +41,6 @@
   },
   "dependencies": {
     "chalk": "^2.4.1",
-    "minimatch": "^3.0.4",
-    "nodegit": "^0.23.0"
+    "minimatch": "^3.0.4"
   }
 }

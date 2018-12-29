@@ -9,13 +9,11 @@ const applyRules = async () => {
   const commits = await git.listCommits(base, "HEAD");
 
   commits.forEach(commit => applyCommitRules(commit));
-  if (config.shouldHaveTests.enabled) {
-    git.onEachCommitPatches(shouldHaveTests);
-  }
 };
 
 const applyCommitRules = commit => {
   shouldHaveFormattedMessage(commit);
+  shouldHaveTests(commit);
 };
 
 module.exports = { applyRules };
