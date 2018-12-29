@@ -1,0 +1,20 @@
+{
+  "origin": "HEAD~20",
+  "shouldHaveTests": {
+    "enabled": true,
+    "level": "ERROR",
+    "subject": "**/*.js",
+    "test": "**/*.test.js",
+    "untestedTag": "#untested"
+  },
+  "shouldHaveFormattedMessage": {
+    "enabled": true,
+    "level": "ERROR",
+    "charactersPerLine": 72
+  },
+  "shouldHaveNoKeywordsInDiffs": {
+    "enabled": false,
+    "level": "INFO",
+    "keywords": ["TODO"]
+  }
+}
