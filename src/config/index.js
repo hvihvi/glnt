@@ -11,6 +11,11 @@ const config = {
     enabled: true,
     level: "ERROR",
     charactersPerLine: 72
+  },
+  shouldHaveNoKeywordsInDiffs: {
+    enabled: true,
+    level: "INFO",
+    keywords: ["TODO"]
   }
 };
 

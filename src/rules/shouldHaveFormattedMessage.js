@@ -17,6 +17,7 @@ const shouldHaveSeparatorLine = (msg, commit) => {
 const shouldHaveNCharPerLine = (msg, commit) => {
   const lines = msg.split("\n");
   if (lines.filter(line => line.length > config.charactersPerLine).length > 0) {
+    // TODO extract condition, no log in unit tests
     logger.logWithSha1(
       `Commit message should be wrapped to ${
         config.charactersPerLine

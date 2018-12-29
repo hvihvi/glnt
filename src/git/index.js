@@ -28,10 +28,20 @@ const getCommitFiles = sha1 =>
     .then(result => result.trim())
     .then(str => util.toLineArray(str));
 
+/**
+ * Returns a string containing the diff patch of the commit
+ */
+const getCommitDiff = sha1 =>
+  util
+    .git(`diff-tree -p ${sha1}`)
+    .then(result => result.trim())
+    .then(str => util.toLineArray(str));
+
 module.exports = {
   findCommonAncestor,
   listCommits,
   getCommitMessage,
   toShortHash,
-  getCommitFiles
+  getCommitFiles,
+  getCommitDiff
 };
