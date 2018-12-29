@@ -5,7 +5,7 @@ it("Should have line separator between header and body", () => {
   const msg = `Add something
   body here...`;
   // when
-  const result = shouldHaveFormattedMessage.shouldHaveSeparatorLine(msg);
+  const result = shouldHaveFormattedMessage.shouldHaveSeparatorLine(msg, "");
   // then
   expect(result).toBeTruthy();
 });
@@ -16,36 +16,25 @@ it("Should have line separator between header and body", () => {
 
   body here...`;
   // when
-  const result = shouldHaveFormattedMessage.shouldHaveSeparatorLine(msg);
+  const result = shouldHaveFormattedMessage.shouldHaveSeparatorLine(msg, "");
   // then
   expect(result).toBeFalsy();
 });
 
-it("Should have less than 80char per lines", () => {
+it("Should have less than 72char per lines", () => {
   // given
   const msg = `Add somethingssssssssssssssssazezeadsqsdazdsqdszasdadadadadadadadadadadadadaadadadadadadadadaezeazeazeazeazeazeazeazeaeazeazeaad`;
   // when
-  const result = shouldHaveFormattedMessage.shouldHaveNCharPerLine(msg);
+  const result = shouldHaveFormattedMessage.shouldHaveNCharPerLine(msg, "");
   // then
   expect(result).toBeTruthy();
 });
 
-it("Should have less than 80char per lines", () => {
+it("Should have less than 72char per lines", () => {
   // given
   const msg = `Add something`;
   // when
-  const result = shouldHaveFormattedMessage.shouldHaveNCharPerLine(msg);
-  // then
-  expect(result).toBeFalsy();
-});
-
-it("Should be formatted message", () => {
-  // given
-  const msg = `Add something
-
-  Has separator line`;
-  // when
-  const result = shouldHaveFormattedMessage.isBadMessage(msg);
+  const result = shouldHaveFormattedMessage.shouldHaveNCharPerLine(msg, "");
   // then
   expect(result).toBeFalsy();
 });
