@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const git = require("../git");
 
 const log = (message, level) => {
   switch (level) {
@@ -11,6 +12,14 @@ const log = (message, level) => {
   }
 };
 
+/**
+ * Amends the given commit sha1 to the log message
+ */
+const logWithSha1 = async (message, level, commit) => {
+  const shortHash = await git.toShortHash(commit);
+  log(`[${shortHash}] ` + message, level);
+};
+
 const info = message => {
   console.log(chalk.yellow("[INFO] ") + chalk.grey(message));
 };
@@ -20,5 +29,6 @@ const error = message => {
 };
 
 module.exports = {
-  log
+  log,
+  logWithSha1
 };
