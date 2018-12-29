@@ -4,7 +4,8 @@ const config = {
     enabled: true,
     level: "INFO",
     subject: "**/*.js",
-    test: "**/*.test.js"
+    test: "**/*.test.js",
+    untestedTag: "#untested"
   },
   shouldHaveFormattedMessage: {
     enabled: true,

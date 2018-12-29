@@ -16,9 +16,12 @@ const hasModifiedFiles = filenames =>
 const hasMissingTests = filenames =>
   hasModifiedFiles(filenames) && !hasModifiedTests(filenames);
 
+const hasUntestedTag = message => message.includes(config.untestedTag);
+
 const shouldHaveTests = async commit => {
   const filenames = await git.getCommitFiles(commit);
-  if (/* TODO nocommithashtag &&  */ hasMissingTests(filenames)) {
+  const message = await git.getCommitMessage(commit);
+  if (hasUntestedTag(message) && hasMissingTests(filenames)) {
     logger.logWithSha1(
       `You modified source files without modifying a test, is a test missing?`,
       config.level,
@@ -28,6 +31,8 @@ const shouldHaveTests = async commit => {
 };
 
 module.exports = {
+  // Visible for testing
+  hasUntestedTag,
   // Visible for testing
   countMatchingFiles,
   shouldHaveTests
