@@ -14,22 +14,23 @@ Outputs warning or error messages to the console if any rules are broken.
 
 # Features
 
-## Should have properly formatter commit message
+## Should have properly formatted commit message
 
-Checks if the commit message has the right format:
+- Checks if the commit message has the right format:
 
-- Line separator between header and body
-- Character lenght per line of header and/or body
+  - Line separator between header and body
 
-Checks if the commit message contains tags (for example should contain related jira issue "#JIRA-123")  
+  - Character lenght per line of header and/or body
 
-Checks if the commit message does not contain tags (for example should not contain "WIP")
+- Checks if the commit message does not contain tags (for example should not contain "WIP")
 
-`//TODO: ` Add more rules based on good practices such as those listed in (https://chris.beams.io/posts/git-commit/) (https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing)
+- TODO: Checks if the commit message contains tags (for example should contain related jira issue "#JIRA-123")
+
+- TODO: Add more rules based on good practices such as those listed in (https://chris.beams.io/posts/git-commit/) (https://github.com/torvalds/subsurface-for-dirk/blob/master/README.md#contributing)
 
 ## Should have tests
 
-Checks if the diff in a commit has code modifications. If so, it should also have test modifications, or a justification for not having tests in the commit message.
+- Checks if the diff in a commit has code modifications. If so, it should also have test modifications, or a justification for not having tests in the commit message.
 
 You can define the code files and test files in the .gintrc file (`//TODO`, currently hardcoded in src/config/config.js)
 
@@ -46,19 +47,28 @@ For example a javascript project would use the following config :
 
 It ensures that any code modification to a `**/*.js` file also has a modification to a `**/*.test.js` file.
 
-`//TODO Feature : Make the code filename match the test filename?`
+- TODO Checks if the commit message contains #notest (configurable tag), that way if a part of the code is untested, the commit message should try to provide an explanation.
 
-`//TODO Feature : check every commits between origin/master (configurable) and current HEAD`
-
-`//TODO Feature : disable flag à rajouter dans le message de commit pour disable une rule (exemple de config : {shouldHaveTests: {disableMessage: "#NOTEST"})`
+- TODO make the code filename match test filename
 
 ## [TODO] Should merge with remote branches
 
 - Checks if the current HEAD merges with origin (default: "origin/master")
 - Checks if the current HEAD merges with all remote branches matching a pattern
-`TODO: something like git merge --no-commit --no-ff ${origin}; git merge --abort; echo "Merge aborted";`
+  (Probably something like `git merge --no-commit --no-ff ${origin}; git merge --abort; echo "Merge aborted";`)
+
+## [TODO] Should not contain TODO in commit patch
+
+- checks if the content of a commit contains "TODO" (configurable)
+
+## [TODO] Should not contain merge commits
+
+- checks if any commit reachable from HEAD and not in `origin` are merge commits (2 parents)
 
 # Dev
+
+After cloning the repository, you will need [nodejs](https://nodejs.org/en/download/package-manager) installed.
+You can download dependencies via yarn: `yarn install`
 
 The CLI can be executed via
 
@@ -66,8 +76,10 @@ The CLI can be executed via
 ./bin/gint.js
 ```
 
-`yarn build` runs babel. This projects uses Babel to transpile ES6 language features to nodejs.
+`yarn lint` Runs eslint
 
-`yarn watch` runs yarn build in watch mode
+`yarn lint:watch` runs eslint in watch mode
 
-`yarn test` runs test in watch mode
+`yarn test` runs jest in watch mode
+
+`yarn prettier` Formats code
