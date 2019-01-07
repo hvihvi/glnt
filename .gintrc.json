@@ -16,5 +16,10 @@
     "enabled": false,
     "level": "INFO",
     "keywords": ["TODO"]
+  },
+  "shouldHaveKeywordsInMessage": {
+    "enabled": true,
+    "level": "ERROR",
+    "keywords": ["AMX-", "BUG-"]
   }
 }

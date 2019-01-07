@@ -29,6 +29,11 @@ const defaultConfig = {
     enabled: true,
     level: "INFO",
     keywords: ["TODO"]
+  },
+  shouldHaveKeywordsInMessage: {
+    enabled: false,
+    level: "INFO",
+    keywords: ["#ISSUE-"]
   }
 };
 

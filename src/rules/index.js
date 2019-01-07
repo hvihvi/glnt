@@ -5,6 +5,8 @@ const shouldHaveFormattedMessage = require("./shouldHaveFormattedMessage")
   .shouldHaveFormattedMessage;
 const shouldHaveNoKeywordsInDiffs = require("./shouldHaveNoKeywordsInDiffs")
   .shouldHaveNoKeywordsInDiffs;
+const shouldHaveKeywordsInMessage = require("./shouldHaveKeywordsInMessage")
+  .shouldHaveKeywordsInMessage;
 
 const applyRules = async () => {
   const base = await git.findCommonAncestor("HEAD", config.origin);
@@ -17,6 +19,7 @@ const applyCommitRules = commit => {
   shouldHaveFormattedMessage(commit);
   shouldHaveTests(commit);
   shouldHaveNoKeywordsInDiffs(commit);
+  shouldHaveKeywordsInMessage(commit);
 };
 
 module.exports = { applyRules };
