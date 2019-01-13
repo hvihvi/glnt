@@ -10,7 +10,7 @@
     "prettier": "prettier --write 'src/**/*.js'",
     "lint": "eslint src --color",
     "lint:watch": "nodemon --watch src --exec yarn lint",
-    "test": "jest --testRegex src/**/*.test.js --watch"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
