@@ -7,12 +7,17 @@ const shouldHaveNoKeywordsInDiffs = require("./shouldHaveNoKeywordsInDiffs")
   .shouldHaveNoKeywordsInDiffs;
 const shouldHaveKeywordsInMessage = require("./shouldHaveKeywordsInMessage")
   .shouldHaveKeywordsInMessage;
+const shouldMergeWithOtherBranches = require("./shouldMergeWithOtherBranches")
+  .shouldMergeWithOtherBranches;
 
 const applyRules = async () => {
   const base = await git.findCommonAncestor("HEAD", config.origin);
   const commits = await git.listCommits(base, "HEAD");
 
+  // per commit rules
   commits.forEach(commit => applyCommitRules(commit));
+  // HEAD rules
+  shouldMergeWithOtherBranches();
 };
 
 const applyCommitRules = commit => {
