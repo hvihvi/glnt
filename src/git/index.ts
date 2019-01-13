@@ -37,11 +37,20 @@ const getCommitDiff = sha1 =>
     .then(result => result.trim())
     .then(str => util.toLineArray(str));
 
+/**
+ * Returns wether the working directory is clean or not
+ */
+const isCleanWorkDir = async () => {
+  const result = await util.git(`status --porcelain`);
+  return util.toLineArray(result.trim()).length === 0;
+};
+
 export default {
   findCommonAncestor,
   listCommits,
   getCommitMessage,
   toShortHash,
   getCommitFiles,
-  getCommitDiff
+  getCommitDiff,
+  isCleanWorkDir
 };

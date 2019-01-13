@@ -34,6 +34,10 @@ const defaultConfig = {
     enabled: false,
     level: "INFO",
     keywords: ["#ISSUE-"]
+  },
+  shouldMergeWithOtherBranches: {
+    enabled: true,
+    level: "INFO"
   }
 };
 

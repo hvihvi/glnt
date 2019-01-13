@@ -1,7 +1,18 @@
+import config from "../config";
+import git from "../git";
 import logger from "../logger";
-// const git = require("../git");
 
-const apply = () => {
+const cfg = config.shouldMergeWithOtherBranches;
+
+const apply = async () => {
+  const isCleanWorkDir = await git.isCleanWorkDir();
+  if (!isCleanWorkDir) {
+    logger.log(
+      "Git working directory must be clean to perform merge checks",
+      cfg.level
+    );
+    return;
+  }
   logger.log("TODO shouldMergeWithOtherBranches", "INFO");
 };
 

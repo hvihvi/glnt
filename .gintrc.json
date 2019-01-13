@@ -21,5 +21,9 @@
     "enabled": true,
     "level": "ERROR",
     "keywords": ["AMX-", "BUG-"]
+  },
+  "shouldMergeWithOtherBranches": {
+    "enabled": true,
+    "level": "ERROR"
   }
 }
