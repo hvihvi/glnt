@@ -1,12 +1,12 @@
-const findProjectRoot = require("find-project-root");
-const fs = require("fs");
+import findProjectRoot = require("find-project-root");
+import { readFileSync } from "fs";
 
 const CONF_FILE_NAME = ".gintrc.json";
 
 const loadConfig = () => {
   const projectRoot = findProjectRoot(process.cwd());
   const loadedConfig = JSON.parse(
-    fs.readFileSync(projectRoot + "/" + CONF_FILE_NAME, "utf8")
+    readFileSync(projectRoot + "/" + CONF_FILE_NAME, "utf8")
   );
   return { ...defaultConfig, ...loadedConfig };
 };
@@ -39,4 +39,4 @@ const defaultConfig = {
 
 const config = loadConfig();
 
-module.exports = { config };
+export default config;

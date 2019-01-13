@@ -1,5 +1,5 @@
-const chalk = require("chalk");
-const git = require("../git");
+import chalk from "chalk";
+import git from "../git";
 
 const log = (message, level) => {
   switch (level) {
@@ -28,7 +28,7 @@ const error = message => {
   console.log(chalk.red("[ERROR] ") + message);
 };
 
-module.exports = {
+export default {
   log,
   logWithSha1
 };

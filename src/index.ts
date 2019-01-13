@@ -1,4 +1,4 @@
-const rules = require("./rules");
+import rules from "./rules";
 
 const run = () => {
   // TODO exit when git index not clean
@@ -7,6 +7,6 @@ const run = () => {
   rules.applyRules();
 };
 
-module.exports = {
+export default {
   run
 };

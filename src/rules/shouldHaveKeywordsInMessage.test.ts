@@ -1,5 +1,4 @@
-const hasKeywordInMessage = require("./shouldHaveKeywordsInMessage")
-  .hasKeywordInMessage;
+import { hasKeywordInMessage } from "./shouldHaveKeywordsInMessage";
 
 it("should return true if contains keyword", () => {
   // given

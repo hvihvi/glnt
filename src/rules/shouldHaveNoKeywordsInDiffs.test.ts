@@ -1,5 +1,4 @@
-const hasKeywordsInDiff = require("./shouldHaveNoKeywordsInDiffs")
-  .hasKeywordsInDiff;
+import { hasKeywordsInDiff } from "./shouldHaveNoKeywordsInDiffs";
 
 it("should return true if contains keyword", () => {
   // given

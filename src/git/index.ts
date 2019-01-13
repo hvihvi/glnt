@@ -1,4 +1,4 @@
-const util = require("./util");
+import util from "./util";
 
 const findCommonAncestor = async (branch1, branch2) => {
   return util.git(`merge-base ${branch1} ${branch2}`).then(sha1 => sha1.trim());
@@ -37,7 +37,7 @@ const getCommitDiff = sha1 =>
     .then(result => result.trim())
     .then(str => util.toLineArray(str));
 
-module.exports = {
+export default {
   findCommonAncestor,
   listCommits,
   getCommitMessage,

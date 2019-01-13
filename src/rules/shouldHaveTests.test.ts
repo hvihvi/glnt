@@ -1,4 +1,4 @@
-const { countMatchingFiles, hasUntestedTag } = require("./shouldHaveTests");
+import { countMatchingFiles, hasUntestedTag } from "./shouldHaveTests";
 
 it("should count matched patterns", () => {
   // given

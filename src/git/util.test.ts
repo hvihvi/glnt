@@ -1,4 +1,4 @@
-const util = require("./util");
+import util from "./util";
 
 it("toLineArray should return an array", () => {
   // given
