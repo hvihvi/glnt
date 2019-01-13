@@ -7,8 +7,10 @@
     "gint": "./bin/gint.js"
   },
   "scripts": {
+    "build": "tsc",
+    "build:watch": "nodemon --watch src --exec tsc",
     "prettier": "prettier --write 'src/**/*.js'",
-    "lint": "eslint src --color",
+    "lint": "tsc && tslint -c tslint.json 'src/**/*.js' --format stylish",
     "lint:watch": "nodemon --watch src --exec yarn lint",
     "test": "jest --watch"
   },
@@ -37,7 +39,11 @@
     "eslint-plugin-standard": "^4.0.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.7",
-    "prettier": "^1.15.3"
+    "prettier": "^1.15.3",
+    "tsc": "^1.20150623.0",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
   },
   "dependencies": {
     "chalk": "^2.4.1",

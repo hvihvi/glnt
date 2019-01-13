@@ -65,3 +65,6 @@ lib/*
 
 # Intellij
 .idea/*
+
+# Typescript build folder
+built/

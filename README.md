@@ -123,17 +123,22 @@ For each commits between `HEAD` and `origin` :
 # Dev
 
 After cloning the repository, you will need [nodejs](https://nodejs.org/en/download/package-manager) installed.
-You can download dependencies via yarn: `yarn install`
+
+You can download dependencies via yarn: `yarn install`.
+
+This project uses [Typescript](https://www.typescriptlang.org/docs). Install via `yarn global add tslint typescript`.
 
 The CLI can be executed via
-
 ```sh
 ./bin/gint.js
 ```
+`yarn build` compiles TS to JS
 
-`yarn lint` Runs eslint
+`yarn build:watch` compiles TS to JS in watch mode
 
-`yarn lint:watch` runs eslint in watch mode
+`yarn lint` Runs tslint
+
+`yarn lint:watch` runs tslint in watch mode
 
 `yarn test` runs jest in watch mode
 
