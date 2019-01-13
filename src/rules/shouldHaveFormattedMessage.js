@@ -14,7 +14,9 @@ const shouldHaveSeparatorLine = (msg, commit) => {
       commit
     );
     return true;
-  } else return false;
+  } else {
+    return false;
+  }
 };
 
 const hasNCharPerLine = msg => {
@@ -32,7 +34,9 @@ const shouldHaveNCharPerLine = (msg, commit) => {
       commit
     );
     return true;
-  } else return false;
+  } else {
+    return false;
+  }
 };
 
 const shouldHaveFormattedMessage = async commit => {
