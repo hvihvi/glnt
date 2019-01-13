@@ -8,10 +8,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "build:watch": "nodemon --watch src --exec tsc",
+    "build:watch": "tsc --watch",
     "prettier": "prettier --write 'src/**/*.ts'",
     "lint": "tsc && tslint -c tslint.json 'src/**/*.ts' --format stylish",
-    "lint:watch": "nodemon --watch src --exec yarn lint",
+    "lint:watch": "nodemon -e ts --watch 'src/**/*.ts' --exec yarn lint",
     "test": "jest --watch"
   },
   "repository": {
