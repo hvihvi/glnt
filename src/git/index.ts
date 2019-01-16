@@ -45,6 +45,21 @@ const isCleanWorkDir = async () => {
   return util.toLineArray(result.trim()).length === 0;
 };
 
+/**
+ * Lists all remote repositories
+ */
+const listRemotes = async () => {
+  const remotes = await util.git(`remote`);
+  return util.toLineArray(remotes.trim());
+};
+
+const canMerge = async (branch: string) => {
+  await util.git(`merge --no-commit --no-ff ${branch}`);
+  const conflicts = util.git(`git ls-files -u`);
+  await util.git(`merge --abort`);
+  return conflicts;
+};
+
 export default {
   findCommonAncestor,
   listCommits,
@@ -52,5 +67,6 @@ export default {
   toShortHash,
   getCommitFiles,
   getCommitDiff,
-  isCleanWorkDir
+  isCleanWorkDir,
+  listRemotes
 };
