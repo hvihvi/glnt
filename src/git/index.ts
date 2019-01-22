@@ -55,9 +55,9 @@ const listRemotes = async () => {
 
 const canMerge = async (branch: string) => {
   await util.git(`merge --no-commit --no-ff ${branch}`);
-  const conflicts = util.git(`git ls-files -u`);
+  const conflicts = await util.git(`git ls-files -u`);
   await util.git(`merge --abort`);
-  return conflicts;
+  return util.toLineArray(conflicts.trim()).length === 0;
 };
 
 export default {
@@ -68,5 +68,6 @@ export default {
   getCommitFiles,
   getCommitDiff,
   isCleanWorkDir,
-  listRemotes
+  listRemotes,
+  canMerge
 };
