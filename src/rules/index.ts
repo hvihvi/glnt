@@ -20,8 +20,8 @@ const applyRules = async () => {
 const applyCommitRules = commit => {
   util.applyRule(shouldHaveFormattedMessage)(commit);
   util.applyRule(shouldHaveTests)(commit);
-  shouldHaveNoKeywordsInDiffs.apply(commit);
-  shouldHaveKeywordsInMessage.apply(commit);
+  util.applyRule(shouldHaveNoKeywordsInDiffs)(commit);
+  util.applyRule(shouldHaveKeywordsInMessage)(commit);
 };
 
 export default { applyRules };

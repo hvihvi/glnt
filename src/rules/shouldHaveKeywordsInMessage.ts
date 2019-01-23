@@ -2,6 +2,7 @@ import config from "../config";
 import git from "../git";
 import logger from "../logger";
 import { toLevel } from "../types/Level";
+import { Rule } from "../types/Rule";
 
 // Visible for testing
 export const hasKeywordInMessage = (msg: string, keywords: string[]) =>
@@ -10,14 +11,24 @@ export const hasKeywordInMessage = (msg: string, keywords: string[]) =>
 const apply = async (commit: string) => {
   const msg = await git.getCommitMessage(commit);
   if (!hasKeywordInMessage(msg, config.shouldHaveKeywordsInMessage.keywords)) {
-    logger.logWithSha1(
-      `Commit message should contain one of the following keywords : ${
-        config.shouldHaveKeywordsInMessage.keywords
-      }`,
-      toLevel(config.shouldHaveKeywordsInMessage.level), // TODO rm toLevel 
-      commit
-    );
+    return {
+      pass: false,
+      message: {
+        content: `Commit message should contain one of the following keywords : ${
+          config.shouldHaveKeywordsInMessage.keywords
+        }`,
+        level,
+        commit
+      }
+    };
+  } else {
+    return { pass: true };
   }
 };
 
-export default { apply };
+const name = "shouldHaveKeywordsInMessage";
+const level = toLevel(config.shouldHaveKeywordsInMessage.level); // TODO rm toLevel
+
+const rule: Rule = { name, apply, level };
+
+export default rule;
