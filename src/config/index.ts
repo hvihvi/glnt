@@ -1,5 +1,6 @@
 import findProjectRoot = require("find-project-root");
 import { readFileSync } from "fs";
+import { Config } from "../types/Config";
 
 const CONF_FILE_NAME = ".gintrc.json";
 
@@ -11,7 +12,7 @@ const loadConfig = () => {
   return { ...defaultConfig, ...loadedConfig };
 };
 
-const defaultConfig = {
+const defaultConfig: Config = {
   origin: "origin/master",
   shouldHaveTests: {
     enabled: true,

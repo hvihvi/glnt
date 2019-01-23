@@ -1,14 +1,17 @@
 import chalk from "chalk";
 import git from "../git";
+import { Level, toLevel } from "../types/Level";
 
-const log = (message, level) => {
-  switch (level) {
-    case "ERROR":
+const log = (message: string, level: string) => {
+  switch (toLevel(level)) {
+    case Level.ERROR:
       error(message);
       break;
-    case "INFO":
+    case Level.INFO:
     default:
       info(message);
+    case Level.DISABLED:
+      return;
   }
 };
 
