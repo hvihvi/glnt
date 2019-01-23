@@ -5,6 +5,7 @@ import shouldHaveKeywordsInMessage from "./shouldHaveKeywordsInMessage";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
 import shouldHaveTests from "./shouldHaveTests";
 import shouldMergeWithOtherBranches from "./shouldMergeWithOtherBranches";
+import util from "./util";
 
 const applyRules = async () => {
   const base = await git.findCommonAncestor("HEAD", config.origin);
@@ -13,7 +14,7 @@ const applyRules = async () => {
   // per commit rules
   commits.forEach(commit => applyCommitRules(commit));
   // HEAD rules
-  shouldMergeWithOtherBranches.apply();
+  util.applyRule(shouldMergeWithOtherBranches)();
 };
 
 const applyCommitRules = commit => {

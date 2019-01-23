@@ -2,10 +2,15 @@ import config from "../config";
 import git from "../git";
 import logger from "../logger";
 import { Level } from "../types/Level";
+import { Apply, Rule } from "../types/Rule";
 
 const cfg = config.shouldMergeWithOtherBranches;
 
-const apply = async () => {
+const name = "shouldMergeWithOtherBranches";
+
+const level = Level.INFO;
+
+const apply: Apply = async () => {
   const isCleanWorkDir = await git.isCleanWorkDir();
   // if (!isCleanWorkDir) {
   //   logger.log(
@@ -16,7 +21,12 @@ const apply = async () => {
   // }
   const remotes = await git.listRemotes();
   console.log(remotes);
-  logger.log("TODO shouldMergeWithOtherBranches", Level.INFO);
+  return {
+    pass: false,
+    message: { content: "TODO shouldMergeWithOtherBranches", level }
+  };
 };
 
-export default { apply };
+const rule: Rule = { name, apply, level };
+
+export default rule;
