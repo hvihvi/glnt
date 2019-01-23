@@ -9,11 +9,12 @@ A Linter for Git
 ```
 npm install --save-dev gint
 ```
+
 or
+
 ```
 yarn add --dev gint
 ```
-
 
 # Usage
 
@@ -22,6 +23,8 @@ CLI :
 ```sh
 gint
 ```
+
+![](log_example.png)
 
 Checks the quality of your git history.
 Outputs warning or error messages to the console if any rules applied to your git history are broken.
@@ -42,24 +45,24 @@ Config Example:
 }
 ```
 
-When ran with this config, `gint` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.  
+When ran with this config, `gint` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.
 
 All rules can be set to "disabled", "INFO" or "ERROR". (TODO: merge enabled & level together in a single field)
 
-* `enabled: false`: the rule won't run at all
-* `level: "INFO"`: the rule will display an informative message, but the script won't exit in an error
-* `level: "ERROR"`: the rule will display an error message, and the script will exit with an error code (not 0, TODO implement exit code)
+- `enabled: false`: the rule won't run at all
+- `level: "INFO"`: the rule will display an informative message, but the script won't exit in an error
+- `level: "ERROR"`: the rule will display an error message, and the script will exit with an error code (not 0, TODO implement exit code)
 
 # Rules available
 
-* [Should have properly formatted commit message](#should-have-properly-formatted-commit-message)
-* [Should have tests](#should-have-tests)
-* [Should not contain keywords in commit patch](#should-not-contain-keywords-in-commit-patch)
-* [Should merge with remote branches](#should-merge-with-remote-branches)
-* [Should not contain merge commits](#should-not-contain-merge-commits)
-* [Should not be used by others](#should-not-be-used-by-others)
-* [Should not diverge too much from origin](#should-not-diverge-too-much-from-origin)
-* [Should only contain renames in rename commits](#should-only-contain-renames-in-rename-commits)
+- [Should have properly formatted commit message](#should-have-properly-formatted-commit-message)
+- [Should have tests](#should-have-tests)
+- [Should not contain keywords in commit patch](#should-not-contain-keywords-in-commit-patch)
+- [Should merge with remote branches](#should-merge-with-remote-branches)
+- [Should not contain merge commits](#should-not-contain-merge-commits)
+- [Should not be used by others](#should-not-be-used-by-others)
+- [Should not diverge too much from origin](#should-not-diverge-too-much-from-origin)
+- [Should only contain renames in rename commits](#should-only-contain-renames-in-rename-commits)
 
 ## Should have properly formatted commit message
 
@@ -188,9 +191,11 @@ You can download dependencies via yarn: `yarn install`.
 This project uses [Typescript](https://www.typescriptlang.org/docs). Install via `yarn global add tslint typescript`.
 
 The CLI can be executed via
+
 ```sh
 ./bin/gint.js
 ```
+
 `yarn build` compiles TS to JS
 
 `yarn build:watch` compiles TS to JS in watch mode
