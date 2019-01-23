@@ -13,7 +13,7 @@ const applyRule = (rule: Rule) => async (...args: any) => {
     return;
   }
   if (!result.pass) {
-    logger.logMessage(result.message);
+    logger.logMessage(result.message, rule);
   }
 };
 
