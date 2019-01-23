@@ -1,6 +1,7 @@
 import config from "../config";
 import git from "../git";
 import logger from "../logger";
+import { toLevel } from "../types/Level";
 
 // Visible for testing
 export const hasKeywordsInDiff = diffs =>
@@ -17,7 +18,7 @@ const apply = async commit => {
       `Diff content should not contain any of the following forbidden keywords : ${
         config.shouldHaveNoKeywordsInDiffs.keywords
       }`,
-      config.shouldHaveNoKeywordsInDiffs.level,
+      toLevel(config.shouldHaveNoKeywordsInDiffs.level), // TODO rm toLevel
       commit
     );
   }

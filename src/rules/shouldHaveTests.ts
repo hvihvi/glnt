@@ -2,6 +2,7 @@ import minimatch = require("minimatch");
 import config from "../config";
 import git from "../git";
 import logger from "../logger";
+import { toLevel } from "../types/Level";
 
 // Visible for testing
 export const countMatchingFiles = (filenames: string[], pattern: string) => {
@@ -30,7 +31,7 @@ const apply = async (commit: string) => {
 Note: You can use "${
         config.shouldHaveTests.untestedTag
       }" in the commit message to bypass this rule`,
-      config.shouldHaveTests.level,
+      toLevel(config.shouldHaveTests.level), // TODO remove toLevel and have conf level as Level
       commit
     );
   }

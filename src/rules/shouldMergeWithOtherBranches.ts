@@ -1,6 +1,7 @@
 import config from "../config";
 import git from "../git";
 import logger from "../logger";
+import { Level } from "../types/Level";
 
 const cfg = config.shouldMergeWithOtherBranches;
 
@@ -15,7 +16,7 @@ const apply = async () => {
   // }
   const remotes = await git.listRemotes();
   console.log(remotes);
-  logger.log("TODO shouldMergeWithOtherBranches", "INFO");
+  logger.log("TODO shouldMergeWithOtherBranches", Level.INFO);
 };
 
 export default { apply };

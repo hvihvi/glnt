@@ -1,6 +1,7 @@
 import config from "../config";
 import git from "../git";
 import logger from "../logger";
+import { toLevel } from "../types/Level";
 
 // Visible for testing
 export const hasKeywordInMessage = (msg: string, keywords: string[]) =>
@@ -13,7 +14,7 @@ const apply = async (commit: string) => {
       `Commit message should contain one of the following keywords : ${
         config.shouldHaveKeywordsInMessage.keywords
       }`,
-      config.shouldHaveKeywordsInMessage.level,
+      toLevel(config.shouldHaveKeywordsInMessage.level), // TODO rm toLevel 
       commit
     );
   }

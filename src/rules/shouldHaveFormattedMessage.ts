@@ -1,6 +1,7 @@
 import config from "../config";
 import git from "../git";
 import logger from "../logger";
+import { toLevel } from "../types/Level";
 
 // Visible for testing
 export const hasSeparatorLine = (msg: string) => {
@@ -34,7 +35,7 @@ const shouldHaveNCharPerLine = (msg: string, commit: string) => {
       `Commit message should be wrapped to ${
         config.shouldHaveFormattedMessage.charactersPerLine
       }char per lines`,
-      config.shouldHaveFormattedMessage.level,
+      toLevel(config.shouldHaveFormattedMessage.level), // TODO rm toLevel
       commit
     );
     return true;
