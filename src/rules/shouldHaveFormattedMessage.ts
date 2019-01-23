@@ -2,52 +2,67 @@ import config from "../config";
 import git from "../git";
 import logger from "../logger";
 import { toLevel } from "../types/Level";
+import { Result, Rule } from "../types/Rule";
+
+const name = "shouldHaveFormattedMessage";
+
+const level = toLevel(config.shouldHaveFormattedMessage.level);
 
 // Visible for testing
-export const hasSeparatorLine = (msg: string) => {
+export const hasNoSeparatorLine = (msg: string) => {
   const lines = msg.split("\n");
   return lines.length > 1 && lines[1] !== "";
 };
-const shouldHaveSeparatorLine = (msg: string, commit: string) => {
-  if (hasSeparatorLine(msg)) {
-    logger.logWithSha1(
-      `Commit message should have a separator line between header and body`,
-      config.shouldHaveFormattedMessage.level,
-      commit
-    );
-    return true;
-  } else {
-    return false;
+const shouldHaveSeparatorLine = (msg: string, commit: string): Result => {
+  if (hasNoSeparatorLine(msg)) {
+    return {
+      pass: false,
+      message: {
+        content: `Commit message should have a separator line between header and body`,
+        level,
+        commit
+      }
+    };
   }
+  return { pass: true };
 };
 
 // Visible for testing
-export const hasNCharPerLine = (msg: string) => {
+export const hasMoreThanNCharPerLine = (msg: string) => {
   const lines = msg.split("\n");
   return lines.some(
     line => line.length > config.shouldHaveFormattedMessage.charactersPerLine
   );
 };
 const shouldHaveNCharPerLine = (msg: string, commit: string) => {
-  if (hasNCharPerLine(msg)) {
+  if (hasMoreThanNCharPerLine(msg)) {
     // TODO extract condition, no log in unit tests
-    logger.logWithSha1(
-      `Commit message should be wrapped to ${
-        config.shouldHaveFormattedMessage.charactersPerLine
-      }char per lines`,
-      toLevel(config.shouldHaveFormattedMessage.level), // TODO rm toLevel
-      commit
-    );
-    return true;
+    return {
+      pass: false,
+      message: {
+        content: `Commit message should be wrapped to ${
+          config.shouldHaveFormattedMessage.charactersPerLine
+        }char per lines`,
+        level,
+        commit
+      }
+    };
   } else {
-    return false;
+    return { pass: true };
   }
 };
 
 const apply = async (commit: string) => {
   const msg = await git.getCommitMessage(commit);
-  shouldHaveSeparatorLine(msg, commit);
-  shouldHaveNCharPerLine(msg, commit);
+  // TODO split in 2 rules
+  const result1 = shouldHaveSeparatorLine(msg, commit);
+  if (!result1.pass) {
+    return result1;
+  } else {
+    return shouldHaveNCharPerLine(msg, commit);
+  }
 };
 
-export default { apply };
+const rule: Rule = { name, apply, level };
+
+export default rule;

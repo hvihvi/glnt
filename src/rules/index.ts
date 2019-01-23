@@ -18,7 +18,7 @@ const applyRules = async () => {
 };
 
 const applyCommitRules = commit => {
-  shouldHaveFormattedMessage.apply(commit);
+  util.applyRule(shouldHaveFormattedMessage)(commit);
   shouldHaveTests.apply(commit);
   shouldHaveNoKeywordsInDiffs.apply(commit);
   shouldHaveKeywordsInMessage.apply(commit);
