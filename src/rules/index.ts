@@ -1,5 +1,7 @@
 import config from "../config/index";
 import git from "../git/index";
+import logger from "../logger";
+import { Result } from "../types/Rule";
 import shouldHaveFormattedMessage from "./shouldHaveFormattedMessage";
 import shouldHaveKeywordsInMessage from "./shouldHaveKeywordsInMessage";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
@@ -11,17 +13,40 @@ const applyRules = async () => {
   const base = await git.findCommonAncestor("HEAD", config.origin);
   const commits = await git.listCommits(base, "HEAD");
 
-  // per commit rules
-  commits.forEach(commit => applyCommitRules(commit));
-  // HEAD rules
-  util.applyRule(shouldMergeWithOtherBranches)();
+  // collect per commit rules
+  const commitResults: Result[] = await Promise.all(
+    commits.map(commit => applyCommitRules(commit))
+  ).then(array => [].concat.apply([], array)); // Equivalent to array.flat TODO util func
+  // collect HEAD rules
+  const headResults: Result[] = await applyHeadRules();
+
+  // merge all results
+  const results = [...commitResults, ...headResults];
+
+  // exit process with 1 if any rule don't pass, 0 otherwise
+  const exitCode = results.some(result => !result.pass) ? 1 : 0;
+  exitCode ? logger.fail() : logger.success();
+  process.exit(exitCode);
 };
 
-const applyCommitRules = commit => {
-  util.applyRule(shouldHaveFormattedMessage)(commit);
-  util.applyRule(shouldHaveTests)(commit);
-  util.applyRule(shouldHaveNoKeywordsInDiffs)(commit);
-  util.applyRule(shouldHaveKeywordsInMessage)(commit);
+/**
+ * Add rules that apply to commits here
+ * @param commit (string)
+ */
+const applyCommitRules = async (commit: string): Promise<Result[]> => {
+  return Promise.all([
+    util.applyRule(shouldHaveFormattedMessage)(commit),
+    util.applyRule(shouldHaveTests)(commit),
+    util.applyRule(shouldHaveNoKeywordsInDiffs)(commit),
+    util.applyRule(shouldHaveKeywordsInMessage)(commit)
+  ]);
+};
+
+/**
+ * Add rules that apply to HEAD here
+ */
+const applyHeadRules = async (): Promise<Result[]> => {
+  return Promise.all([util.applyRule(shouldMergeWithOtherBranches)()]);
 };
 
 export default { applyRules };

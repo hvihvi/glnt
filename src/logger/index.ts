@@ -55,6 +55,18 @@ const error = (message, name) => {
   );
 };
 
+/**
+ * Message printed when all rules pass
+ */
+const success = () => console.log(chalk.green("\nSuccess! All git rules pass!\n"));
+
+/**
+ * Message printed when at least one rule doesn't pass
+ */
+const fail = () => console.log(chalk.red("\nFail! :( Please fix errors above\n"));
+
 export default {
-  logMessage
+  logMessage,
+  success,
+  fail
 };
