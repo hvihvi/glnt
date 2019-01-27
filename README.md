@@ -4,16 +4,14 @@ A Linter for Git
 
 # Installation
 
-(TODO publish to NPM)
-
 ```
-npm install --save-dev glnt
+npm install -g glnt
 ```
 
-or
+or with yarn :
 
 ```
-yarn add --dev glnt
+yarn global add glnt
 ```
 
 # Usage
