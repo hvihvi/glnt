@@ -22,33 +22,27 @@ const loadConfig = () => {
 const defaultConfig: Config = {
   origin: "origin/master",
   shouldHaveTests: {
-    enabled: true,
     level: "INFO",
     subject: "**/*.js",
     test: "**/*.test.js",
     untestedTag: "#untested"
   },
   shouldHaveNCharPerLine: {
-    enabled: true,
     level: "INFO",
     charactersPerLine: 72
   },
   shouldHaveSeparatorLine: {
-    enabled: true,
     level: "INFO"
   },
   shouldHaveNoKeywordsInDiffs: {
-    enabled: true,
     level: "INFO",
     keywords: ["TODO"]
   },
   shouldHaveKeywordsInMessage: {
-    enabled: false,
     level: "INFO",
     keywords: ["#ISSUE-"]
   },
   shouldMergeWithOtherBranches: {
-    enabled: true,
     level: "INFO"
   }
 };

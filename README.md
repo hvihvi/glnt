@@ -37,7 +37,6 @@ Config Example:
 {
   "origin": "origin/master",
   "shouldHaveNoKeywordsInDiffs": {
-    "enabled": false,
     "level": "INFO",
     "keywords": ["TODO"]
   }
@@ -46,9 +45,9 @@ Config Example:
 
 When ran with this config, `glnt` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.
 
-All rules can be set to "disabled", "INFO" or "ERROR". (TODO: merge enabled & level together in a single field)
+All rules can be set to "DISABLED", "INFO" or "ERROR".
 
-- `enabled: false`: the rule won't run at all
+- `level: DISABLED`: the rule won't run at all
 - `level: "INFO"`: the rule will display an informative message, but the script won't exit in an error
 - `level: "ERROR"`: the rule will display an error message, and the script will exit with an error code (not 0, TODO implement exit code)
 
@@ -98,7 +97,6 @@ Default Config :
 ```json
 {
   "shouldHaveTests": {
-    "enabled": true,
     "level": "INFO",
     "subject": "**/*.js",
     "test": "**/*.test.js",
@@ -130,7 +128,6 @@ Default config :
 ```json
 {
   "shouldHaveNoKeywordsInDiffs": {
-    "enabled": false,
     "level": "INFO",
     "keywords": ["TODO"]
   }

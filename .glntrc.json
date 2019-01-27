@@ -1,24 +1,20 @@
 {
   "origin": "HEAD~20",
   "shouldHaveTests": {
-    "enabled": true,
     "level": "ERROR",
     "subject": "**/*.js",
     "test": "**/*.test.js",
     "untestedTag": "#untested"
   },
   "shouldHaveNoKeywordsInDiffs": {
-    "enabled": true,
     "level": "INFO",
     "keywords": ["TODO"]
   },
   "shouldHaveKeywordsInMessage": {
-    "enabled": true,
     "level": "INFO",
     "keywords": ["AMX-", "BUG-"]
   },
   "shouldMergeWithOtherBranches": {
-    "enabled": true,
     "level": "ERROR"
   }
 }

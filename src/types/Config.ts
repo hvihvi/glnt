@@ -9,8 +9,7 @@ export interface Config {
 }
 
 export interface RuleConfig {
-  enabled: boolean; // TODO => remove and replace with level=DISABLED
-  level: string; // TODO => type as Level
+  level: string;
 }
 
 export interface ShouldHaveTestsConfig extends RuleConfig {
