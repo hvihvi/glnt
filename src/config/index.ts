@@ -21,10 +21,14 @@ const defaultConfig: Config = {
     test: "**/*.test.js",
     untestedTag: "#untested"
   },
-  shouldHaveFormattedMessage: {
+  shouldHaveNCharPerLine: {
     enabled: true,
     level: "INFO",
     charactersPerLine: 72
+  },
+  shouldHaveSeparatorLine: {
+    enabled: true,
+    level: "INFO"
   },
   shouldHaveNoKeywordsInDiffs: {
     enabled: true,

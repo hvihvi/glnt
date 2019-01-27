@@ -7,19 +7,14 @@
     "test": "**/*.test.js",
     "untestedTag": "#untested"
   },
-  "shouldHaveFormattedMessage": {
-    "enabled": true,
-    "level": "ERROR",
-    "charactersPerLine": 72
-  },
   "shouldHaveNoKeywordsInDiffs": {
-    "enabled": false,
+    "enabled": true,
     "level": "INFO",
     "keywords": ["TODO"]
   },
   "shouldHaveKeywordsInMessage": {
     "enabled": true,
-    "level": "ERROR",
+    "level": "INFO",
     "keywords": ["AMX-", "BUG-"]
   },
   "shouldMergeWithOtherBranches": {

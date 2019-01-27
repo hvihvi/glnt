@@ -1,6 +1,5 @@
 import config from "../config";
 import git from "../git";
-import logger from "../logger";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 

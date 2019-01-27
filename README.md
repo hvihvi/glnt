@@ -38,9 +38,10 @@ Config Example:
 ```json
 {
   "origin": "origin/master",
-  "shouldHaveFormattedMessage": {
-    "enabled": true,
-    "level": "ERROR"
+  "shouldHaveNoKeywordsInDiffs": {
+    "enabled": false,
+    "level": "INFO",
+    "keywords": ["TODO"]
   }
 }
 ```
@@ -69,13 +70,13 @@ All rules can be set to "disabled", "INFO" or "ERROR". (TODO: merge enabled & le
 Default config :
 
 ```json
-{
-  "shouldHaveFormattedMessage": {
-    "enabled": true,
-    "level": "ERROR",
+  shouldHaveNCharPerLine: {
+    "level": "INFO",
     "charactersPerLine": 72
-  }
-}
+  },
+  shouldHaveSeparatorLine: {
+    "level": "INFO"
+  },
 ```
 
 For each commits between `HEAD` and `origin` :

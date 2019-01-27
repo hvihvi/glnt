@@ -1,9 +1,8 @@
-import { Level } from "./Level";
-
 export interface Config {
   origin: string;
   shouldHaveTests: ShouldHaveTestsConfig;
-  shouldHaveFormattedMessage: ShouldHaveFormattedMessageConfig;
+  shouldHaveNCharPerLine: CharPerLineConfig;
+  shouldHaveSeparatorLine: RuleConfig;
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHaveKeywordsInMessage: KeywordsConfig;
   shouldMergeWithOtherBranches: RuleConfig; // TODO => PatternConfig
@@ -20,7 +19,7 @@ export interface ShouldHaveTestsConfig extends RuleConfig {
   untestedTag: string; // TODO => array for more tags
 }
 
-export interface ShouldHaveFormattedMessageConfig extends RuleConfig {
+export interface CharPerLineConfig extends RuleConfig {
   charactersPerLine: number;
 }
 
