@@ -1,14 +1,21 @@
 import findProjectRoot = require("find-project-root");
-import { readFileSync } from "fs";
+import { existsSync, readFileSync } from "fs";
+import logger from "../logger";
 import { Config } from "../types/Config";
 
 const CONF_FILE_NAME = ".glntrc.json";
 
 const loadConfig = () => {
   const projectRoot = findProjectRoot(process.cwd());
-  const loadedConfig = JSON.parse(
-    readFileSync(projectRoot + "/" + CONF_FILE_NAME, "utf8")
-  );
+  const filename = projectRoot + "/" + CONF_FILE_NAME;
+  if (!existsSync(filename)) {
+    logger.error(
+      "Please create a config file first",
+      "No .glntrc.json file found"
+    );
+    process.exit(1);
+  }
+  const loadedConfig = JSON.parse(readFileSync(filename, "utf8"));
   return { ...defaultConfig, ...loadedConfig };
 };
 
