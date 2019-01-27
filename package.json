@@ -1,10 +1,10 @@
 {
-  "name": "gint",
+  "name": "glnt",
   "version": "1.0.0",
   "description": "Linter for Git",
   "main": "./src/index.js",
   "bin": {
-    "gint": "./bin/gint.js"
+    "glnt": "./bin/glnt.js"
   },
   "scripts": {
     "build": "tsc",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hvihvi/gint.git"
+    "url": "git+https://github.com/hvihvi/glnt.git"
   },
   "keywords": [
     "git",
@@ -25,9 +25,9 @@
   "author": "hvihvi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hvihvi/gint/issues"
+    "url": "https://github.com/hvihvi/glnt/issues"
   },
-  "homepage": "https://github.com/hvihvi/gint#readme",
+  "homepage": "https://github.com/hvihvi/glnt#readme",
   "devDependencies": {
     "@types/find-project-root": "^1.1.0",
     "@types/jest": "^23.3.12",

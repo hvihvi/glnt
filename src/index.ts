@@ -1,7 +1,7 @@
 import rules from "./rules";
 
 /**
- * This export allows usage from ../bin/gint.js
+ * This export allows usage from ../bin/glnt.js
  * which uses the JS compiled via typescript in ../built
  */
 export const run = () => {

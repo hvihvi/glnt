@@ -2,7 +2,7 @@ import findProjectRoot = require("find-project-root");
 import { readFileSync } from "fs";
 import { Config } from "../types/Config";
 
-const CONF_FILE_NAME = ".gintrc.json";
+const CONF_FILE_NAME = ".glntrc.json";
 
 const loadConfig = () => {
   const projectRoot = findProjectRoot(process.cwd());

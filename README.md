@@ -1,19 +1,19 @@
-# gint
+# glnt
 
 A Linter for Git
 
 # Installation
 
-(TODO rename, already used by another NPM package and publish to NPM)
+(TODO publish to NPM)
 
 ```
-npm install --save-dev gint
+npm install --save-dev glnt
 ```
 
 or
 
 ```
-yarn add --dev gint
+yarn add --dev glnt
 ```
 
 # Usage
@@ -21,7 +21,7 @@ yarn add --dev gint
 CLI :
 
 ```sh
-gint
+glnt
 ```
 
 ![](log_example.png)
@@ -31,7 +31,7 @@ Outputs warning or error messages to the console if any rules applied to your gi
 
 It can be used to enforce clean git history rules in a team/project, facilitate code reviews...
 
-Implemented rules can be configured via a `.gintrc.json` file placed at the root of the project repository.
+Implemented rules can be configured via a `.glntrc.json` file placed at the root of the project repository.
 
 Config Example:
 
@@ -46,7 +46,7 @@ Config Example:
 }
 ```
 
-When ran with this config, `gint` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.
+When ran with this config, `glnt` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.
 
 All rules can be set to "disabled", "INFO" or "ERROR". (TODO: merge enabled & level together in a single field)
 
@@ -113,7 +113,7 @@ For each commits between `HEAD` and `origin` :
 
 - Checks if the diff in a commit has code modifications. If so, it should also have test modifications, or a justification for not having tests in the commit message.
 
-You can define the code files and test files in the `.gintrc` file with `shouldHaveTests.subject` and `shouldHaveTests.test` keys.
+You can define the code files and test files in the `.glntrc` file with `shouldHaveTests.subject` and `shouldHaveTests.test` keys.
 
 By default, it ensures that any code modification to a `**/*.js` file also has a modification to a `**/*.test.js` file.
 
@@ -194,7 +194,7 @@ This project uses [Typescript](https://www.typescriptlang.org/docs). Install via
 The CLI can be executed via
 
 ```sh
-./bin/gint.js
+./bin/glnt.js
 ```
 
 `yarn build` compiles TS to JS
