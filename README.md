@@ -36,14 +36,15 @@ Config Example:
 ```json
 {
   "origin": "origin/master",
-  "shouldHaveNoKeywordsInDiffs": {
+  "shouldHaveTests": {
     "level": "INFO",
-    "keywords": ["TODO"]
+    "subject": "**/*.js",
+    "test": "**/*.test.js"
   }
 }
 ```
 
-When ran with this config, `glnt` will output a "shouldHaveFormattedMessage" error if any commit messages reachable from `HEAD` and not in `origin/master` is not formatted.
+When ran with this config, `glnt` will output a "shouldHaveTests" info if any commit reachable from `HEAD` and not in `origin/master` contains modification of code files without modification to a test file.
 
 All rules can be set to "DISABLED", "INFO" or "ERROR".
 

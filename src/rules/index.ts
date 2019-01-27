@@ -3,7 +3,7 @@ import git from "../git/index";
 import logger from "../logger";
 import { Result } from "../types/Rule";
 import shouldHaveKeywordsInMessage from "./shouldHaveKeywordsInMessage";
-import shouldHaveFormattedMessage from "./shouldHaveNCharPerLine";
+import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
 import shouldHaveSeparatorLine from "./shouldHaveSeparatorLine";
 import shouldHaveTests from "./shouldHaveTests";
@@ -36,7 +36,7 @@ const applyRules = async () => {
  */
 const applyCommitRules = async (commit: string): Promise<Result[]> => {
   return Promise.all([
-    util.applyRule(shouldHaveFormattedMessage)(commit),
+    util.applyRule(shouldHaveNCharPerLine)(commit),
     util.applyRule(shouldHaveTests)(commit),
     util.applyRule(shouldHaveNoKeywordsInDiffs)(commit),
     util.applyRule(shouldHaveKeywordsInMessage)(commit),
