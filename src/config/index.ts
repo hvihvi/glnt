@@ -5,7 +5,7 @@ import { Config } from "../types/Config";
 
 const CONF_FILE_NAME = ".glntrc.json";
 
-const loadConfig = () => {
+const loadConfig = (): Config => {
   const projectRoot = findProjectRoot(process.cwd());
   const filename = projectRoot + "/" + CONF_FILE_NAME;
   if (!existsSync(filename)) {
@@ -40,7 +40,7 @@ const defaultConfig: Config = {
   },
   shouldHaveKeywordsInMessage: {
     level: "INFO",
-    keywords: ["#ISSUE-"]
+    patterns: []
   },
   shouldMergeWithOtherBranches: {
     level: "INFO"

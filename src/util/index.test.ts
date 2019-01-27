@@ -1,4 +1,4 @@
-import util from "./util";
+import util from ".";
 
 it("toLineArray should return an array", () => {
   // given

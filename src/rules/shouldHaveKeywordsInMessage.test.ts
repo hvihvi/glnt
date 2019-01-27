@@ -1,11 +1,11 @@
-import { hasKeywordInMessage } from "./shouldHaveKeywordsInMessage";
+import { messageMatchesPattern } from "./shouldHaveKeywordsInMessage";
 
 it("should return true if contains keyword", () => {
   // given
   const msg = "blabla #ISSUE-123 blabla";
   const keywords = ["#ISSUE-"];
   // when
-  const result = hasKeywordInMessage(msg, keywords);
+  const result = messageMatchesPattern(msg, keywords);
   // then
   expect(result).toBeTruthy();
 });
@@ -15,7 +15,7 @@ it("should return false if contains no keyword", () => {
   const msg = "blabla ISSUE-123 blabla";
   const keywords = ["#ISSUE-"];
   // when
-  const result = hasKeywordInMessage(msg, keywords);
+  const result = messageMatchesPattern(msg, keywords);
   // then
   expect(result).toBeFalsy();
 });
@@ -25,7 +25,7 @@ it("should return false if contains no keyword", () => {
   const msg = "blabla #ISSU-123 blabla";
   const keywords = ["#ISSUE-"];
   // when
-  const result = hasKeywordInMessage(msg, keywords);
+  const result = messageMatchesPattern(msg, keywords);
   // then
   expect(result).toBeFalsy();
 });

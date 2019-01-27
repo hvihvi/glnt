@@ -1,21 +1,24 @@
+import { match } from "minimatch";
 import config from "../config";
 import git from "../git";
-import logger from "../logger";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 // Visible for testing
-export const hasKeywordInMessage = (msg: string, keywords: string[]) =>
-  keywords.some(keyword => msg.includes(keyword));
+export const messageMatchesPattern = (msg: string, patterns: string[]) =>
+  // TODO minimatch instead of includes
+  patterns.some(pattern => msg.includes(pattern));
 
 const apply = async (commit: string) => {
   const msg = await git.getCommitMessage(commit);
-  if (!hasKeywordInMessage(msg, config.shouldHaveKeywordsInMessage.keywords)) {
+  if (
+    !messageMatchesPattern(msg, config.shouldHaveKeywordsInMessage.patterns)
+  ) {
     return {
       pass: false,
       message: {
-        content: `Commit message should contain one of the following keywords : ${
-          config.shouldHaveKeywordsInMessage.keywords
+        content: `Commit message should match one of the following patterns : ${
+          config.shouldHaveKeywordsInMessage.patterns
         }`,
         level,
         commit

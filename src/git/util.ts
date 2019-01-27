@@ -6,16 +6,9 @@ const exec = async (cmd: string) => {
   return stdout;
 };
 
-const git = (cmd: string) => exec("git " + cmd);
-
-/**
- * To array of lines, removes empty strings
- */
-const toLineArray = (str: string): string[] =>
-  str.split("\n").filter(s => s !== "");
+export const git = (cmd: string) => exec("git " + cmd);
 
 export default {
   exec,
-  git,
-  toLineArray
+  git
 };
