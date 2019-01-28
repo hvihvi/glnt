@@ -58,7 +58,7 @@ All rules can be set to "DISABLED", "INFO" or "ERROR".
 - [Should have tests](#should-have-tests)
 - [Should not contain keywords in commit patch](#should-not-contain-keywords-in-commit-patch)
 - [Should match patterns in commit message](#should-match-patterns-in-commit-message)
-- [Should merge with remote branches](#should-merge-with-remote-branches)
+- [Should merge with other branches](#should-merge-with-other-branches)
 - [Should not contain merge commits](#should-not-contain-merge-commits)
 - [Should not be used by others](#should-not-be-used-by-others)
 - [Should not diverge too much from origin](#should-not-diverge-too-much-from-origin)
@@ -168,7 +168,7 @@ For each commits between `HEAD` and `origin` :
 
 For example, you could require that each commit relate to a Jira issue key.
 
-## Should merge with remote branches
+## Should merge with other branches
 
 TODO: Not implemented
 

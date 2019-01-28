@@ -1,3 +1,4 @@
+import chalk from "chalk";
 import utils from "../util";
 import { git } from "./util";
 
@@ -51,11 +52,29 @@ const listRemotes = async () => {
   return utils.toLineArray(remotes.trim());
 };
 
+/**
+ * Lists all remote branches matching given pattern
+ */
+const listRemoteBranches = async (pattern: string): Promise<string[]> => {
+  const branches = await git(`branch --remotes --list "${pattern}"`);
+  return utils.toLineArray(branches).slice(1); // remove the first element of the list ( HEAD )
+};
+
+/**
+ * checks if current HEAD can merge with given branch
+ */
 const canMerge = async (branch: string) => {
-  await git(`merge --no-commit --no-ff ${branch}`);
-  const conflicts = await git(`git ls-files -u`);
-  await git(`merge --abort`);
-  return utils.toLineArray(conflicts.trim()).length === 0;
+  try {
+    await git(`merge --no-commit ${branch}`);
+    console.log(chalk.grey(`No conflicts with `) + chalk.green(`${branch}`));
+    await git(`reset --hard`);
+    return true;
+  } catch (e) {
+    console.log(chalk.grey(`Conflicts found with `) + chalk.red(`${branch}`));
+    await git(`merge --abort`);
+    await git(`reset --hard`);
+    return false;
+  }
 };
 
 export default {
@@ -67,5 +86,6 @@ export default {
   getCommitDiff,
   isCleanWorkDir,
   listRemotes,
+  listRemoteBranches,
   canMerge
 };
