@@ -12,7 +12,7 @@
   },
   "shouldHavePatternsInMessage": {
     "level": "INFO",
-    "keywords": ["*AMX-*", "*BUG-*"]
+    "patterns": ["*AMX-*", "*BUG-*"]
   },
   "shouldMergeWithOtherBranches": {
     "level": "ERROR"
