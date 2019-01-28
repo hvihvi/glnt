@@ -1,6 +1,7 @@
 import config from "../config/index";
 import git from "../git/index";
 import logger from "../logger";
+import { Level } from "../types/Level";
 import { Result } from "../types/Rule";
 import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
@@ -24,10 +25,12 @@ const applyRules = async () => {
   // merge all results
   const results = [...commitResults, ...headResults];
 
-  // exit process with 1 if any rule don't pass, 0 otherwise
-  const exitCode = results.some(result => !result.pass) ? 1 : 0;
+  // exit process with 1 if any rule maked as ERROR don't pass, 0 otherwise
+  const exitCode = results.some(
+    result => !result.pass && result.message.level === Level.ERROR
+  );
   exitCode ? logger.fail() : logger.success();
-  process.exit(exitCode);
+  process.exit(exitCode ? 1 : 0);
 };
 
 /**

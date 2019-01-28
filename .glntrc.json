@@ -1,7 +1,7 @@
 {
   "origin": "HEAD~20",
   "shouldHaveTests": {
-    "level": "ERROR",
+    "level": "INFO",
     "subject": "**/*.js",
     "test": "**/*.test.js",
     "untestedTag": "#untested"
