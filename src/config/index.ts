@@ -38,7 +38,7 @@ const defaultConfig: Config = {
     level: "INFO",
     keywords: ["TODO"]
   },
-  shouldHaveKeywordsInMessage: {
+  shouldHavePatternsInMessage: {
     level: "INFO",
     patterns: []
   },

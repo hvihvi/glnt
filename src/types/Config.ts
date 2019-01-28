@@ -4,7 +4,7 @@ export interface Config {
   shouldHaveNCharPerLine: CharPerLineConfig;
   shouldHaveSeparatorLine: RuleConfig;
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
-  shouldHaveKeywordsInMessage: PatternsConfig;
+  shouldHavePatternsInMessage: PatternsConfig;
   shouldMergeWithOtherBranches: RuleConfig; // TODO => PatternConfig
 }
 

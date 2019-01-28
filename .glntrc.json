@@ -10,9 +10,9 @@
     "level": "INFO",
     "keywords": ["TODO"]
   },
-  "shouldHaveKeywordsInMessage": {
+  "shouldHavePatternsInMessage": {
     "level": "INFO",
-    "keywords": ["AMX-", "BUG-"]
+    "keywords": ["*AMX-*", "*BUG-*"]
   },
   "shouldMergeWithOtherBranches": {
     "level": "ERROR"

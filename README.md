@@ -57,6 +57,7 @@ All rules can be set to "DISABLED", "INFO" or "ERROR".
 - [Should have properly formatted commit message](#should-have-properly-formatted-commit-message)
 - [Should have tests](#should-have-tests)
 - [Should not contain keywords in commit patch](#should-not-contain-keywords-in-commit-patch)
+- [Should match patterns in commit message](#should-match-patterns-in-commit-message)
 - [Should merge with remote branches](#should-merge-with-remote-branches)
 - [Should not contain merge commits](#should-not-contain-merge-commits)
 - [Should not be used by others](#should-not-be-used-by-others)
@@ -140,6 +141,25 @@ For each commits between `HEAD` and `origin` :
 - checks if the content of a commit contains "TODO" (configurable)
 
 For example you might want to avoid using, or be informed when using `null`, `TODO`, `console.log` (if you don't have a linter that already cover such rules)...
+
+## Should match patterns in commit message
+
+Example :
+
+```json
+{
+  "shouldHavePatternsInMessage": {
+    "level": "INFO",
+    "patterns": ["*#JIRA-*", "*#BUG-*"]
+  }
+}
+```
+
+For each commits between `HEAD` and `origin` :
+
+- check if any of the patterns listed match the commit message. See [minimatch](https://www.npmjs.com/package/minimatch) for more info on pattern matching.
+
+For example, you could require that each commit relate to a Jira issue key.
 
 ## Should merge with remote branches
 

@@ -1,9 +1,9 @@
-import { messageMatchesPattern } from "./shouldHaveKeywordsInMessage";
+import { messageMatchesPattern } from "./shouldHavePatternsInMessage";
 
 it("should return true if contains keyword", () => {
   // given
-  const msg = "blabla #ISSUE-123 blabla";
-  const keywords = ["#ISSUE-"];
+  const msg = "bla\nb\nla #ISSUE-123 blabla";
+  const keywords = ["*#ISSUE-*"];
   // when
   const result = messageMatchesPattern(msg, keywords);
   // then
@@ -13,7 +13,7 @@ it("should return true if contains keyword", () => {
 it("should return false if contains no keyword", () => {
   // given
   const msg = "blabla ISSUE-123 blabla";
-  const keywords = ["#ISSUE-"];
+  const keywords = ["*#ISSUE-*"];
   // when
   const result = messageMatchesPattern(msg, keywords);
   // then
@@ -23,9 +23,19 @@ it("should return false if contains no keyword", () => {
 it("should return false if contains no keyword", () => {
   // given
   const msg = "blabla #ISSU-123 blabla";
-  const keywords = ["#ISSUE-"];
+  const keywords = ["*#ISSUE-*"];
   // when
   const result = messageMatchesPattern(msg, keywords);
   // then
   expect(result).toBeFalsy();
+});
+
+it("should return true if contains one keyword", () => {
+  // given
+  const msg = "blabla #ISSUE-123 blabla\nblablabla";
+  const keywords = ["*#ISSUE-*", "*#BUG-*"];
+  // when
+  const result = messageMatchesPattern(msg, keywords);
+  // then
+  expect(result).toBeTruthy();
 });

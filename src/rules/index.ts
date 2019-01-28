@@ -2,9 +2,9 @@ import config from "../config/index";
 import git from "../git/index";
 import logger from "../logger";
 import { Result } from "../types/Rule";
-import shouldHaveKeywordsInMessage from "./shouldHaveKeywordsInMessage";
 import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
+import shouldHavePatternsInMessage from "./shouldHavePatternsInMessage";
 import shouldHaveSeparatorLine from "./shouldHaveSeparatorLine";
 import shouldHaveTests from "./shouldHaveTests";
 import shouldMergeWithOtherBranches from "./shouldMergeWithOtherBranches";
@@ -39,7 +39,7 @@ const applyCommitRules = async (commit: string): Promise<Result[]> => {
     util.applyRule(shouldHaveNCharPerLine)(commit),
     util.applyRule(shouldHaveTests)(commit),
     util.applyRule(shouldHaveNoKeywordsInDiffs)(commit),
-    util.applyRule(shouldHaveKeywordsInMessage)(commit),
+    util.applyRule(shouldHavePatternsInMessage)(commit),
     util.applyRule(shouldHaveSeparatorLine)(commit)
   ]);
 };
