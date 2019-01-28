@@ -19,9 +19,8 @@ const apply: Apply = async () => {
   //   return;
   // }
   const remotes = await git.listRemotes();
-  console.log(remotes);
   return {
-    pass: false,
+    pass: true,
     message: { content: "TODO shouldMergeWithOtherBranches", level }
   };
 };
