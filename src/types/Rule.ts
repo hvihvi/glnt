@@ -8,6 +8,8 @@ export interface Result {
   message?: Message;
 }
 
+export const PASS: Result = { pass: true };
+
 export interface Rule {
   apply: Apply;
   name: string;

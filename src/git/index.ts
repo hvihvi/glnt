@@ -51,6 +51,17 @@ const listRemotes = async () => {
   return utils.toLineArray(remotes.trim());
 };
 
+/**
+ * Lists all remote branches matching given pattern
+ */
+const listRemoteBranches = async (pattern: string): Promise<string[]> => {
+  const branches = await git(`branch --remotes --list "${pattern}"`);
+  return utils.toLineArray(branches).slice(1); // remove the first element of the list ( HEAD )
+};
+
+/**
+ * checks if current HEAD can merge with given branch
+ */
 const canMerge = async (branch: string) => {
   await git(`merge --no-commit --no-ff ${branch}`);
   const conflicts = await git(`git ls-files -u`);
@@ -67,5 +78,6 @@ export default {
   getCommitDiff,
   isCleanWorkDir,
   listRemotes,
+  listRemoteBranches,
   canMerge
 };

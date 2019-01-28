@@ -5,6 +5,7 @@ const toLineArray = (str: string): string[] =>
   str
     .trim()
     .split("\n")
-    .filter(s => s !== "");
+    .filter(s => s !== "")
+    .map(s => s.trim());
 
 export default { toLineArray };
