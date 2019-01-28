@@ -125,7 +125,7 @@ The idea here is that if a part of the code is purposely untested, the commit me
 
 ## Should not contain keywords in commit patch
 
-Default config :
+Example config :
 
 ```json
 {
@@ -144,7 +144,7 @@ For example you might want to avoid using, or be informed when using `null`, `TO
 
 ## Should match patterns in commit message
 
-Example :
+Example config :
 
 ```json
 {
