@@ -64,7 +64,7 @@ typings/
 lib/*
 
 # Intellij
-.idea/*
+.idea/
 
 # Typescript build folder
 built/
