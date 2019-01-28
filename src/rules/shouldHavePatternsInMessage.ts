@@ -7,7 +7,6 @@ import util from "../util";
 
 // Visible for testing
 export const messageMatchesPattern = (msg: string, patterns: string[]) => {
-  // TODO minimatch instead of includes
   return patterns.some(
     pattern => match(util.toLineArray(msg), pattern).length > 0
   );
