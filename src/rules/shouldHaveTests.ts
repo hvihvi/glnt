@@ -23,20 +23,20 @@ const hasMissingTests = (filenames: string[]) =>
   hasModifiedFiles(filenames) && !hasModifiedTests(filenames);
 
 // Visible for testing
-export const hasUntestedTag = message =>
-  message.includes(config.shouldHaveTests.untestedTag);
+export const hasSkipTag = (message: string): boolean =>
+  config.shouldHaveTests.skipTags.some(tag => message.includes(tag));
 
 const apply = async (commit: string) => {
   const filenames = await git.getCommitFiles(commit);
   const message = await git.getCommitMessage(commit);
-  if (!hasUntestedTag(message) && hasMissingTests(filenames)) {
+  if (!hasSkipTag(message) && hasMissingTests(filenames)) {
     return {
       pass: false,
       message: {
-        content: `You modified source files without modifying a test. Is this code not tested?
-        Note: You can use "${
-          config.shouldHaveTests.untestedTag
-        }" in the commit message to bypass this rule`,
+        content: `You modified source files without modifying a test. Is a test missing? ಠ_ರೃ
+        Note: Tag your commit message with [${
+          config.shouldHaveTests.skipTags
+        }] to bypass this rule`,
         level,
         commit
       }

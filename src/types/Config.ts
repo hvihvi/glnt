@@ -5,7 +5,7 @@ export interface Config {
   shouldHaveSeparatorLine: RuleConfig;
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHavePatternsInMessage: PatternsConfig;
-  shouldMergeWithOtherBranches: RuleConfig; // TODO => PatternConfig
+  shouldMergeWithOtherBranches: RuleConfig;
 }
 
 export interface RuleConfig {
@@ -15,7 +15,7 @@ export interface RuleConfig {
 export interface ShouldHaveTestsConfig extends RuleConfig {
   subject: string;
   test: string;
-  untestedTag: string; // TODO => array for more tags
+  skipTags: string[];
 }
 
 export interface CharPerLineConfig extends RuleConfig {

@@ -25,7 +25,14 @@ const defaultConfig: Config = {
     level: "INFO",
     subject: "**/*.js",
     test: "**/*.test.js",
-    untestedTag: "#untested"
+    skipTags: [
+      "#untested",
+      "#refacto",
+      "#refactoring",
+      "#iso",
+      "#trivial",
+      "#notest"
+    ]
   },
   shouldHaveNCharPerLine: {
     level: "INFO",

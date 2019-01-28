@@ -102,7 +102,14 @@ Default Config :
     "level": "INFO",
     "subject": "**/*.js",
     "test": "**/*.test.js",
-    "untestedTag": "#untested"
+    "skipTags": [
+      "#untested",
+      "#refacto",
+      "#refactoring",
+      "#iso",
+      "#trivial",
+      "#notest"
+    ]
   }
 }
 ```
@@ -115,8 +122,8 @@ You can define the code files and test files in the `.glntrc` file with `shouldH
 
 By default, it ensures that any code modification to a `**/*.js` file also has a modification to a `**/*.test.js` file.
 
-If the commit message contains `#untested` (configurable tag), this rule doesn't apply.
-The idea here is that if a part of the code is purposely untested, the commit message should try to provide an explanation.
+If the commit message contains any tag in `skipTags`, this rule doesn't apply.
+The idea here is that if a code modification comes with no test modification, the commit message should try to provide an explanation.
 
 - TODO make the code filename match test filename
 

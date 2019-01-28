@@ -65,7 +65,7 @@ const success = () =>
  * Message printed when at least one rule doesn't pass
  */
 const fail = () =>
-  console.log(chalk.red("\nFail! :( Please fix errors above\n"));
+  console.log(chalk.red("\nFail! (ｏ・_・)ノ”(ᴗ_ ᴗ。) Please fix errors above\n"));
 
 export default {
   logMessage,

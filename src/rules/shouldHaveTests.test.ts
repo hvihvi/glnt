@@ -1,4 +1,4 @@
-import { countMatchingFiles, hasUntestedTag } from "./shouldHaveTests";
+import { countMatchingFiles, hasSkipTag } from "./shouldHaveTests";
 
 it("should count matched patterns", () => {
   // given
@@ -22,7 +22,7 @@ it("should return true when has untested tag", () => {
   `;
 
   // when
-  const result = hasUntestedTag(message);
+  const result = hasSkipTag(message);
 
   // then
   expect(result).toBeTruthy();
@@ -36,7 +36,7 @@ it("should return false when has no untested tag", () => {
   `;
 
   // when
-  const result = hasUntestedTag(message);
+  const result = hasSkipTag(message);
 
   // then
   expect(result).toBeFalsy();
