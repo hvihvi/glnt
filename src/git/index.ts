@@ -57,7 +57,10 @@ const listRemotes = async () => {
  */
 const listRemoteBranches = async (pattern: string): Promise<string[]> => {
   const branches = await git(`branch --remotes --list "${pattern}"`);
-  return utils.toLineArray(branches).slice(1); // remove the first element of the list ( HEAD )
+  return utils.toLineArray(branches).filter(
+    line =>
+      !line.includes("HEAD") && !line.includes(" ") && !line.includes("->") // removes the HEAD line
+  );
 };
 
 /**

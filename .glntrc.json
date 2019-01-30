@@ -10,6 +10,6 @@
   },
   "shouldMergeWithOtherBranches": {
     "level": "INFO",
-    "pattern": "origin/*"
+    "pattern": "origin/master"
   }
 }
