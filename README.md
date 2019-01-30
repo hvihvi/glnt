@@ -172,7 +172,7 @@ For example, you could require that each commit relate to a Jira issue key.
 
 Default configuration :
 
-```
+```json
   "shouldMergeWithOtherBranches": {
     "level": "INFO",
     "pattern": "origin/*"
@@ -181,10 +181,15 @@ Default configuration :
 
 - Checks if the current HEAD merges with other remote branches matching then given pattern
 
-Check `git branch --remotes` for the pattern syntax.
+Check `git branch --remotes` for the pattern syntax. (https://git-scm.com/docs/git-branch)
 
 This feedback allows you to detect conflicts early, you should try to solve them before piling more commits.
 
+The default value merge-checks all remote branches via `"pattern": "origin/*"`.
+
+You could use `"pattern": "origin/master"` for example to only merge-check agains master.
+
+You can also use branche naming patterns like `"pattern": "origin/candidate/*"` to only merge-check against branches following the naming pattern `candidate/*`.
 
 ## Should not contain merge commits
 
