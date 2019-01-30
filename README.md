@@ -170,11 +170,21 @@ For example, you could require that each commit relate to a Jira issue key.
 
 ## Should merge with other branches
 
-TODO: Not implemented
+Default configuration :
 
-- Checks if the current HEAD merges with origin (default: "origin/master")
-- Checks if the current HEAD merges with all remote branches matching a pattern
-  (Probably something like `git merge --no-commit --no-ff ${origin}; git merge --abort; echo "Merge aborted";`)
+```
+  "shouldMergeWithOtherBranches": {
+    "level": "INFO",
+    "pattern": "origin/*"
+  }
+```
+
+- Checks if the current HEAD merges with other remote branches matching then given pattern
+
+Check `git branch --remotes` for the pattern syntax.
+
+This feedback allows you to detect conflicts early, you should try to solve them before piling more commits.
+
 
 ## Should not contain merge commits
 

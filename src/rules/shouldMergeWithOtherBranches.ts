@@ -30,7 +30,7 @@ const apply: Apply = async () => {
   if (!isCleanWorkDir) {
     return FAIL_WORKDIR;
   }
-  const branches: string[] = await git.listRemoteBranches("origin/*");
+  const branches: string[] = await git.listRemoteBranches(cfg.pattern);
   const conflictBranches = [];
   console.log(chalk.yellow("Starting merge checks..."));
   for (const br of branches) {

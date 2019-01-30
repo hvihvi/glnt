@@ -5,7 +5,7 @@ export interface Config {
   shouldHaveSeparatorLine: RuleConfig;
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHavePatternsInMessage: PatternsConfig;
-  shouldMergeWithOtherBranches: RuleConfig;
+  shouldMergeWithOtherBranches: PatternConfig;
 }
 
 export interface RuleConfig {
@@ -28,4 +28,8 @@ export interface KeywordsConfig extends RuleConfig {
 
 export interface PatternsConfig extends RuleConfig {
   patterns: string[];
+}
+
+export interface PatternConfig extends RuleConfig {
+  pattern: string;
 }

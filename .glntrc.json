@@ -9,6 +9,7 @@
     "patterns": ["*AMX-*", "*BUG-*"]
   },
   "shouldMergeWithOtherBranches": {
-    "level": "ERROR"
+    "level": "INFO",
+    "pattern": "origin/*"
   }
 }

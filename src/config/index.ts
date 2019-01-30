@@ -50,7 +50,8 @@ const defaultConfig: Config = {
     patterns: []
   },
   shouldMergeWithOtherBranches: {
-    level: "INFO"
+    level: "INFO",
+    pattern: "origin/*"
   }
 };
 
