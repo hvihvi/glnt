@@ -5,7 +5,7 @@
     "keywords": ["TODO"]
   },
   "shouldHavePatternsInMessage": {
-    "level": "INFO",
+    "level": "DISABLED",
     "patterns": ["*AMX-*", "*BUG-*"]
   },
   "shouldMergeWithOtherBranches": {
