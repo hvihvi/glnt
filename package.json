@@ -1,6 +1,6 @@
 {
   "name": "glnt",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Linter for Git",
   "main": "./built/index.js",
   "bin": {
