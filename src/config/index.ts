@@ -52,6 +52,9 @@ const defaultConfig: Config = {
   shouldMergeWithOtherBranches: {
     level: "INFO",
     pattern: "origin/*"
+  },
+  shouldNotBeUsedByOthers: {
+    level: "INFO"
   }
 };
 

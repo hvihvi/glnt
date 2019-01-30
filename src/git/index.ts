@@ -57,11 +57,14 @@ const listRemotes = async () => {
  */
 const listRemoteBranches = async (pattern: string): Promise<string[]> => {
   const branches = await git(`branch --remotes --list "${pattern}"`);
-  return utils.toLineArray(branches).filter(
-    line =>
-      !line.includes("HEAD") && !line.includes(" ") && !line.includes("->") // removes the HEAD line
-  );
+  return utils.toLineArray(branches).filter(filterHead);
 };
+
+/**
+ * Removes the HEAD line when using `git branch`
+ */
+const filterHead = (line: string) =>
+  !line.includes("HEAD") && !line.includes(" ") && !line.includes("->");
 
 /**
  * checks if current HEAD can merge with given branch
@@ -80,6 +83,16 @@ const canMerge = async (branch: string) => {
   }
 };
 
+/**
+ * Returns a list of remote branches using given commit (not including HEAD)
+ */
+const isUsedByBranches = async (commit: string): Promise<string[]> => {
+  const usedByBranches = await git(
+    `branch --remotes --list --contains ${commit}`
+  );
+  return utils.toLineArray(usedByBranches).filter(filterHead);
+};
+
 export default {
   findCommonAncestor,
   listCommits,
@@ -90,5 +103,6 @@ export default {
   isCleanWorkDir,
   listRemotes,
   listRemoteBranches,
-  canMerge
+  canMerge,
+  isUsedByBranches
 };

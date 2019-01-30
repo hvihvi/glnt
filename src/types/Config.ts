@@ -6,6 +6,7 @@ export interface Config {
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHavePatternsInMessage: PatternsConfig;
   shouldMergeWithOtherBranches: PatternConfig;
+  shouldNotBeUsedByOthers: RuleConfig;
 }
 
 export interface RuleConfig {
