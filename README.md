@@ -201,9 +201,17 @@ For each commits between `HEAD` and `origin` :
 
 ## Should not be used by others
 
-TODO: Not implemented
+Default config :
 
-- checks if any other remote branches use any commits between `HEAD` and `origin`
+```json
+{
+  "shouldNotBeUsedByOthers": {
+    "level": "INFO"
+  }
+}
+```
+
+- checks if any other remote branche uses a commits between current `HEAD` and `origin`
 
 For example you can set this to "INFO" level, it allows you to check if using rebase on your branche is dangerous or not.
 
