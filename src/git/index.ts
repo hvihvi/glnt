@@ -61,6 +61,18 @@ const listRemoteBranches = async (pattern: string): Promise<string[]> => {
 };
 
 /**
+ * Returns wether the passed ref exist or not
+ */
+const refExists = async (ref: string) => {
+  try {
+    const result = await git(`rev-parse --quiet --verify ${ref}`);
+    return result.length > 0;
+  } catch (e) {
+    return false;
+  }
+};
+
+/**
  * Removes the HEAD line when using `git branch`
  */
 const filterHead = (line: string) =>
@@ -104,5 +116,6 @@ export default {
   listRemotes,
   listRemoteBranches,
   canMerge,
-  isUsedByBranches
+  isUsedByBranches,
+  refExists
 };

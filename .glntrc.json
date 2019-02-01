@@ -1,5 +1,5 @@
 {
-  "origin": "HEAD~20",
+  "origin": "HEAD~10",
   "shouldHaveNoKeywordsInDiffs": {
     "level": "INFO",
     "keywords": ["TODO"]

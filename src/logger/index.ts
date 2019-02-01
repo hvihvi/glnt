@@ -70,11 +70,22 @@ const logMissingConfig = () => {
   console.log(chalk.red.underline("No .glntrc.json config file found"));
 };
 
+const logMissingMaster = (ref: string) => {
+  console.log(
+    chalk.redBright(`The branch `) +
+      chalk.redBright.underline.bold(ref) +
+      chalk.redBright(
+        ` doesn't exist.\nPlease use a valid branch name in your configuration file.`
+      )
+  );
+};
+
 export default {
   logMessage,
   success,
   fail,
   info,
   error,
-  logMissingConfig
+  logMissingConfig,
+  logMissingMaster
 };

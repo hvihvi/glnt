@@ -13,6 +13,12 @@ import shouldNotBeUsedByOthers from "./shouldNotBeUsedByOthers";
 import util from "./util";
 
 const applyRules = async () => {
+  // exit if origin branch doesn't exist
+  const masterExists = await git.refExists(config.origin);
+  if (!masterExists) {
+    logger.logMissingMaster(config.origin);
+    process.exit(1);
+  }
   const base = await git.findCommonAncestor("HEAD", config.origin);
   const commits = await git.listCommits(base, "HEAD");
 
