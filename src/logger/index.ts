@@ -64,13 +64,17 @@ const success = () =>
 /**
  * Message printed when at least one rule doesn't pass
  */
-const fail = () =>
-  console.log(chalk.red("\nFail! (ｏ・_・)ノ”(ᴗ_ ᴗ。) Please fix errors above\n"));
+const fail = () => console.log(chalk.red("\nFail! Please fix errors above\n"));
+
+const logMissingConfig = () => {
+  console.log(chalk.red.underline("No .glntrc.json config file found"));
+};
 
 export default {
   logMessage,
   success,
   fail,
   info,
-  error
+  error,
+  logMissingConfig
 };

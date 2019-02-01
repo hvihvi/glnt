@@ -1,6 +1,7 @@
-import chalk from "chalk";
 import findProjectRoot = require("find-project-root");
 import { existsSync, readFileSync } from "fs";
+import { prompts } from "prompts";
+import logger from "../logger";
 import { Config } from "../types/Config";
 
 const CONF_FILE_NAME = ".glntrc.json";
@@ -9,12 +10,16 @@ const loadConfig = (): Config => {
   const projectRoot = findProjectRoot(process.cwd());
   const filename = projectRoot + "/" + CONF_FILE_NAME;
   if (!existsSync(filename)) {
-    console.log(
-      chalk.red.underline("No .glntrc.json file found") +
-        chalk.red(
-          "\nPlease create a config file. Fallback to using default config, might not behave properly."
-        )
-    );
+    logger.logMissingConfig();
+    // TODO prompt to create config + memoize config
+    //
+    // const response = await prompts.confirm({
+    //   type: "confirm",
+    //   name: "value",
+    //   message: "Would you like to create a configuration file?",
+    //   initial: true
+    // });
+    // console.log(response);
     return defaultConfig;
   }
   const loadedConfig = JSON.parse(readFileSync(filename, "utf8"));
