@@ -216,19 +216,20 @@ For each commits between `HEAD` and `origin` :
 
 ## Should not be used by others
 
-Default config :
+Example config :
 
 ```json
 {
   "shouldNotBeUsedByOthers": {
-    "level": "INFO"
+    "level": "INFO",
+    "ignores": ["origin/wip"]
   }
 }
 ```
 
-- checks if any other remote branche uses a commits between current `HEAD` and `origin`
+- checks if any other remote branch uses a commits between current `HEAD` and `origin`. Ignores branches in the `ignores` list.
 
-For example you can set this to "INFO" level, it allows you to check if using rebase on your branche is dangerous or not.
+It allows you to check if using a `rebase` or `commit --amend` on your commit is dangerous or not.
 
 ## Should not diverge too much from origin
 
@@ -248,7 +249,7 @@ This rules facilitate review of large rename commits, ensuring nothing else besi
 
 After cloning the repository, you will need [nodejs](https://nodejs.org/en/download/package-manager) installed.
 
-You can download dependencies via yarn: `yarn install`.
+This project uses yarn. You can download dependencies via yarn: `yarn install`.
 
 This project uses [Typescript](https://www.typescriptlang.org/docs). Install via `yarn global add tslint typescript`.
 
