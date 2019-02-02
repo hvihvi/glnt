@@ -1,6 +1,18 @@
 # glnt
 
-A Linter for Git
+A Linter for Git.
+
+Manual git verifications automated :
+
+- "Do I have conflict with anyone else?"
+- "Can I rebase my branch without bothering someone else?"
+- "Are my commit messages properly written?"
+- "Did I forget a TODO reminder, or to test something?"
+- ...
+
+`Glnt` takes a look at your history to answer these kind of questions automatically.
+
+It can be used to self check, facilitate code reviews, enforce rules surrounding git in a team/project, provide feedbacks via CI tools...
 
 # Installation
 
@@ -22,12 +34,12 @@ CLI :
 glnt
 ```
 
+The first usage will help you in creating your configuration if it doesn't already exist.
+Once you're done, run it again to run verifications:
+
 ![](log_example.png)
 
-Checks the quality of your git history.
 Outputs warning or error messages to the console if any rules applied to your git history are broken.
-
-It can be used to enforce clean git history rules in a team/project, facilitate code reviews...
 
 Implemented rules can be configured via a `.glntrc.json` file placed at the root of the project repository.
 
@@ -36,21 +48,22 @@ Config Example:
 ```json
 {
   "origin": "origin/master",
-  "shouldHaveTests": {
+  "shouldMergeWithOtherBranches": {
     "level": "INFO",
-    "subject": "**/*.js",
-    "test": "**/*.test.js"
+    "pattern": "origin/*"
   }
 }
 ```
 
-When ran with this config, `glnt` will output a "shouldHaveTests" info if any commit reachable from `HEAD` and not in `origin/master` contains modification of code files without modification to a test file.
+When ran with this config, `glnt` will output a "shouldMergeWithOtherBranches" info if current `HEAD` does not merge with remote branches matching the pattern `origin/*`.
 
 All rules can be set to "DISABLED", "INFO" or "ERROR".
 
 - `level: DISABLED`: the rule won't run at all
 - `level: "INFO"`: the rule will display an informative message, but the script won't exit in an error
 - `level: "ERROR"`: the rule will display an error message, and the script will exit with an error code (not 0, TODO implement exit code)
+
+**For script use and CI:** Exits with error code 1 if any rule configured with `"level": "ERROR"` do not pass the verification, exits with 0 otherwise.
 
 # Rules available
 
