@@ -1,29 +1,29 @@
-import config from "../config";
 import git from "../git";
+import { KeywordsConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
+// TODO rename rule to shouldHaveNoKeywordsInAddedDiffs
 const name = "shouldHaveNoKeywordsInDiffs";
-const level = toLevel(config.shouldHaveNoKeywordsInDiffs.level); // TODO rm toLevel
 
 // Visible for testing
-export const hasKeywordsInDiff = diffs =>
-  config.shouldHaveNoKeywordsInDiffs.keywords.some(keyword =>
+export const hasKeywordsInDiff = (diffs: string[], keywords: string[]) =>
+  keywords.some(keyword =>
     diffs
       .filter(diff => diff.startsWith("+"))
       .some(diff => diff.includes(keyword))
   );
 
-const apply = async commit => {
+const apply = async (config: KeywordsConfig, commit: string) => {
   const diffs = await git.getCommitDiff(commit);
-  if (hasKeywordsInDiff(diffs)) {
+  if (hasKeywordsInDiff(diffs, config.keywords)) {
     return {
       pass: false,
       message: {
         content: `Diff content should not contain any of the following forbidden keywords : ${
-          config.shouldHaveNoKeywordsInDiffs.keywords
+          config.keywords
         }`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -32,6 +32,6 @@ const apply = async commit => {
   }
 };
 
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;

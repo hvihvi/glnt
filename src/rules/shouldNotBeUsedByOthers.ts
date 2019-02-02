@@ -1,13 +1,11 @@
-import config from "../config";
 import git from "../git";
+import { RuleConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldNotBeUsedByOthers";
 
-const level = toLevel(config.shouldNotBeUsedByOthers.level);
-
-const apply = async (commit: string) => {
+const apply = async (config: RuleConfig, commit: string) => {
   const isUsedBy = await git.isUsedByBranches(commit);
   if (isUsedBy.length > 0) {
     return {
@@ -15,7 +13,7 @@ const apply = async (commit: string) => {
       message: {
         content: `Other branches are using this commit : ${isUsedBy}
         Note: Avoid using git-rebase on this commit`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -23,6 +21,6 @@ const apply = async (commit: string) => {
   return { pass: true };
 };
 
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;

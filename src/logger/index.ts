@@ -18,12 +18,12 @@ const log = (message: string, level: Level, name: string) => {
 };
 
 // TODO rename as log, and hide old log as implementation detail
-const logMessage = (message: Message, rule: Rule) => {
+const logMessage = (level: Level, message: Message, rule: Rule) => {
   if (message.commit) {
-    logWithSha1(message.content, rule.level, rule.name, message.commit);
+    logWithSha1(message.content, level, rule.name, message.commit);
   } else {
     // TODO fix toString followed by toLevel...
-    log(message.content, rule.level, rule.name);
+    log(message.content, level, rule.name);
   }
 };
 

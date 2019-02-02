@@ -22,7 +22,7 @@ it("should return true when has untested tag", () => {
   `;
 
   // when
-  const result = hasSkipTag(message);
+  const result = hasSkipTag(message, ["#untested"]);
 
   // then
   expect(result).toBeTruthy();
@@ -36,7 +36,7 @@ it("should return false when has no untested tag", () => {
   `;
 
   // when
-  const result = hasSkipTag(message);
+  const result = hasSkipTag(message, ["#untested"]);
 
   // then
   expect(result).toBeFalsy();

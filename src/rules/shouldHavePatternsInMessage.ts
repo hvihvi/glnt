@@ -1,6 +1,6 @@
 import { match } from "minimatch";
-import config from "../config";
 import git from "../git";
+import { PatternsConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 import util from "../util";
@@ -12,18 +12,16 @@ export const messageMatchesPattern = (msg: string, patterns: string[]) => {
   );
 };
 
-const apply = async (commit: string) => {
+const apply = async (config: PatternsConfig, commit: string) => {
   const msg = await git.getCommitMessage(commit);
-  if (
-    !messageMatchesPattern(msg, config.shouldHavePatternsInMessage.patterns)
-  ) {
+  if (!messageMatchesPattern(msg, config.patterns)) {
     return {
       pass: false,
       message: {
         content: `Commit message should match one of the following patterns : ${
-          config.shouldHavePatternsInMessage.patterns
+          config.patterns
         }`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -33,8 +31,7 @@ const apply = async (commit: string) => {
 };
 
 const name = "shouldHavePatternsInMessage";
-const level = toLevel(config.shouldHavePatternsInMessage.level); // TODO rm toLevel
 
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;

@@ -1,30 +1,29 @@
-import config from "../config";
 import git from "../git";
+import { CharPerLineConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldHaveNCharPerLine";
 
-const level = toLevel(config.shouldHaveNCharPerLine.level);
-
 // Visible for testing
-export const hasMoreThanNCharPerLine = (msg: string) => {
+export const hasMoreThanNCharPerLine = (
+  msg: string,
+  charactersPerLine: number
+) => {
   const lines = msg.split("\n");
-  return lines.some(
-    line => line.length > config.shouldHaveNCharPerLine.charactersPerLine
-  );
+  return lines.some(line => line.length > charactersPerLine);
 };
 
-const shouldHaveNCharPerLine = (msg: string, commit: string) => {
-  if (hasMoreThanNCharPerLine(msg)) {
-    // TODO extract condition, no log in unit tests
+const apply = async (config: CharPerLineConfig, commit: string) => {
+  const msg = await git.getCommitMessage(commit);
+  if (hasMoreThanNCharPerLine(msg, config.charactersPerLine)) {
     return {
       pass: false,
       message: {
         content: `Commit message should be wrapped to ${
-          config.shouldHaveNCharPerLine.charactersPerLine
+          config.charactersPerLine
         }char per lines`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -32,12 +31,6 @@ const shouldHaveNCharPerLine = (msg: string, commit: string) => {
     return { pass: true };
   }
 };
-
-const apply = async (commit: string) => {
-  const msg = await git.getCommitMessage(commit);
-  return shouldHaveNCharPerLine(msg, commit);
-};
-
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;

@@ -1,11 +1,9 @@
-import config from "../config";
 import git from "../git";
+import { RuleConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
-import { Result, Rule } from "../types/Rule";
+import { Rule } from "../types/Rule";
 
 const name = "shouldHaveSeparatorLine";
-
-const level = toLevel(config.shouldHaveSeparatorLine.level);
 
 // Visible for testing
 export const hasNoSeparatorLine = (msg: string) => {
@@ -13,13 +11,14 @@ export const hasNoSeparatorLine = (msg: string) => {
   return lines.length > 1 && lines[1] !== "";
 };
 
-const shouldHaveSeparatorLine = (msg: string, commit: string): Result => {
+const apply = async (config: RuleConfig, commit: string) => {
+  const msg = await git.getCommitMessage(commit);
   if (hasNoSeparatorLine(msg)) {
     return {
       pass: false,
       message: {
         content: `Commit message should have a separator line between header and body`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -27,11 +26,6 @@ const shouldHaveSeparatorLine = (msg: string, commit: string): Result => {
   return { pass: true };
 };
 
-const apply = async (commit: string) => {
-  const msg = await git.getCommitMessage(commit);
-  return shouldHaveSeparatorLine(msg, commit);
-};
-
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;

@@ -65,6 +65,4 @@ const defaultConfig: Config = {
   }
 };
 
-const config = loadConfig();
-
-export default config;
+export default { loadConfig };

@@ -1,6 +1,7 @@
-import config from "../config/index";
-import git from "../git/index";
+import cfg from "../config";
+import git from "../git";
 import logger from "../logger";
+import { Config } from "../types/Config";
 import { Level } from "../types/Level";
 import { Result } from "../types/Rule";
 import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
@@ -13,6 +14,7 @@ import shouldNotBeUsedByOthers from "./shouldNotBeUsedByOthers";
 import util from "./util";
 
 const applyRules = async () => {
+  const config = await cfg.loadConfig();
   // exit if origin branch doesn't exist
   const masterExists = await git.refExists(config.origin);
   if (!masterExists) {
@@ -24,10 +26,10 @@ const applyRules = async () => {
 
   // collect per commit rules
   const commitResults: Result[] = await Promise.all(
-    commits.map(commit => applyCommitRules(commit))
+    commits.map(commit => applyCommitRules(commit, config))
   ).then(array => [].concat.apply([], array)); // Equivalent to array.flat TODO util func
   // collect HEAD rules
-  const headResults: Result[] = await applyHeadRules();
+  const headResults: Result[] = await applyHeadRules(config);
 
   // merge all results
   const results = [...commitResults, ...headResults];
@@ -44,22 +46,25 @@ const applyRules = async () => {
  * Add rules that apply to commits here
  * @param commit (string)
  */
-const applyCommitRules = async (commit: string): Promise<Result[]> => {
+const applyCommitRules = async (
+  commit: string,
+  config: Config
+): Promise<Result[]> => {
   return Promise.all([
-    util.applyRule(shouldHaveNCharPerLine)(commit),
-    util.applyRule(shouldHaveTests)(commit),
-    util.applyRule(shouldHaveNoKeywordsInDiffs)(commit),
-    util.applyRule(shouldHavePatternsInMessage)(commit),
-    util.applyRule(shouldHaveSeparatorLine)(commit),
-    util.applyRule(shouldNotBeUsedByOthers)(commit)
+    util.applyRule(shouldHaveNCharPerLine)(config, commit),
+    util.applyRule(shouldHaveTests)(config, commit),
+    util.applyRule(shouldHaveNoKeywordsInDiffs)(config, commit),
+    util.applyRule(shouldHavePatternsInMessage)(config, commit),
+    util.applyRule(shouldHaveSeparatorLine)(config, commit),
+    util.applyRule(shouldNotBeUsedByOthers)(config, commit)
   ]);
 };
 
 /**
  * Add rules that apply to HEAD here
  */
-const applyHeadRules = async (): Promise<Result[]> => {
-  return Promise.all([util.applyRule(shouldMergeWithOtherBranches)()]);
+const applyHeadRules = async (config: Config): Promise<Result[]> => {
+  return Promise.all([util.applyRule(shouldMergeWithOtherBranches)(config)]);
 };
 
 export default { applyRules };

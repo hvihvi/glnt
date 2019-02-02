@@ -1,43 +1,45 @@
 import minimatch = require("minimatch");
-import config from "../config";
 import git from "../git";
-import logger from "../logger";
+import { ShouldHaveTestsConfig } from "../types/Config";
 import { toLevel } from "../types/Level";
-import { Result, Rule } from "../types/Rule";
+import { Rule } from "../types/Rule";
 
 const name = "shouldHaveTests";
-const level = toLevel(config.shouldHaveTests.level);
 
 // Visible for testing
 export const countMatchingFiles = (filenames: string[], pattern: string) => {
   return filenames.filter(filename => minimatch(filename, pattern)).length;
 };
 
-const hasModifiedTests = (filenames: string[]) =>
-  countMatchingFiles(filenames, config.shouldHaveTests.test) > 0;
+const hasModifiedTests = (filenames: string[], test: string) =>
+  countMatchingFiles(filenames, test) > 0;
 
-const hasModifiedFiles = (filenames: string[]) =>
-  countMatchingFiles(filenames, config.shouldHaveTests.subject) > 0;
+const hasModifiedFiles = (filenames: string[], subject: string) =>
+  countMatchingFiles(filenames, subject) > 0;
 
-const hasMissingTests = (filenames: string[]) =>
-  hasModifiedFiles(filenames) && !hasModifiedTests(filenames);
+const hasMissingTests = (filenames: string[], config: ShouldHaveTestsConfig) =>
+  hasModifiedFiles(filenames, config.test) &&
+  !hasModifiedTests(filenames, config.subject);
 
 // Visible for testing
-export const hasSkipTag = (message: string): boolean =>
-  config.shouldHaveTests.skipTags.some(tag => message.includes(tag));
+export const hasSkipTag = (message: string, skipTags: string[]): boolean =>
+  skipTags.some(tag => message.includes(tag));
 
-const apply = async (commit: string) => {
+const apply = async (config: ShouldHaveTestsConfig, commit: string) => {
   const filenames = await git.getCommitFiles(commit);
   const message = await git.getCommitMessage(commit);
-  if (!hasSkipTag(message) && hasMissingTests(filenames)) {
+  if (
+    !hasSkipTag(message, config.skipTags) &&
+    hasMissingTests(filenames, config)
+  ) {
     return {
       pass: false,
       message: {
         content: `You modified source files without modifying a test. Is a test missing? ಠ_ರೃ
         Note: Tag your commit message with [${
-          config.shouldHaveTests.skipTags
+          config.skipTags
         }] to bypass this rule`,
-        level,
+        level: toLevel(config.level),
         commit
       }
     };
@@ -46,6 +48,6 @@ const apply = async (commit: string) => {
   }
 };
 
-const rule: Rule = { name, apply, level };
+const rule: Rule = { name, apply };
 
 export default rule;
