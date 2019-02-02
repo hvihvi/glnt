@@ -6,6 +6,9 @@ import util from "../util";
 
 // Visible for testing
 export const messageMatchesPattern = (msg: string, patterns: string[]) => {
+  if (patterns.length === 0) {
+    return true;
+  }
   return patterns.some(
     pattern => match(util.toLineArray(msg), pattern).length > 0
   );

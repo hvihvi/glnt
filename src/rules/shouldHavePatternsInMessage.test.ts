@@ -39,3 +39,13 @@ it("should return true if contains one keyword", () => {
   // then
   expect(result).toBeTruthy();
 });
+
+it("should return false if list is empty", () => {
+  // given
+  const msg = "blabla #ISSUE-123 blabla\nblablabla";
+  const keywords = [];
+  // when
+  const result = messageMatchesPattern(msg, keywords);
+  // then
+  expect(result).toBeTruthy();
+});
