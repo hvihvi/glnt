@@ -35,11 +35,22 @@ const applyRules = async () => {
   const results = [...commitResults, ...headResults];
 
   // exit process with 1 if any rule maked as ERROR don't pass, 0 otherwise
-  const exitCode = results.some(
+  const error = results.some(
     result => !result.pass && result.level === Level.ERROR
   );
-  exitCode ? logger.fail() : logger.success();
-  process.exit(exitCode ? 1 : 0);
+  const info = results.some(
+    result => !result.pass && result.level === Level.INFO
+  );
+  if (error) {
+    logger.fail();
+    process.exit(1);
+  } else if (info) {
+    logger.warn();
+    process.exit(0);
+  } else {
+    logger.success();
+    process.exit(0);
+  }
 };
 
 /**

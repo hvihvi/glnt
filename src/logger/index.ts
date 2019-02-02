@@ -70,6 +70,13 @@ const success = () =>
  */
 const fail = () => console.log(chalk.red("\nFail! Please fix errors above\n"));
 
+const warn = () =>
+  console.log(
+    chalk.yellow(
+      "\nWarning! Above rules didn't pass but no errors were found\n"
+    )
+  );
+
 const logMissingMaster = (ref: string) => {
   console.log(
     chalk.redBright(`The branch `) +
@@ -84,6 +91,7 @@ export default {
   logMessage,
   success,
   fail,
+  warn,
   info,
   error,
   logMissingMaster
