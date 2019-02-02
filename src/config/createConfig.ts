@@ -109,7 +109,7 @@ const configureShouldNotBeUsedByOthers = async (ruleName: string) => {
     ruleName,
     "Checks if any other remote branches use your commits (useful to check wether it's safe to use git-rebase for example)"
   );
-  return { level };
+  return { level, ignores: [] };
 };
 
 const configureShouldHaveSeparatorLine = async (ruleName: string) => {

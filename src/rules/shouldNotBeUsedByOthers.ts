@@ -1,14 +1,23 @@
 import git from "../git";
-import { RuleConfig } from "../types/Config";
+import { IgnoresConfig } from "../types/Config";
 import { FAIL, PASS, Rule } from "../types/Rule";
 
 const name = "shouldNotBeUsedByOthers";
 
-const apply = async (config: RuleConfig, commit: string) => {
+// Visible for Testing
+export const users = (
+  isUsedBy: string[],
+  ignores: string[],
+  origin: string
+): string[] => {
+  return isUsedBy.filter(usedBy => !ignores.concat([origin]).includes(usedBy));
+};
+
+const apply = async (config: IgnoresConfig, commit: string, origin: string) => {
   const isUsedBy = await git.isUsedByBranches(commit);
-  // TODO filter common branches and remote self
-  if (isUsedBy.length > 0) {
-    return FAIL(`Other branches are using this commit : ${isUsedBy}
+  const isUsedByFiltered = users(isUsedBy, config.ignores, origin);
+  if (isUsedByFiltered.length > 0) {
+    return FAIL(`Other branches are using this commit : ${isUsedByFiltered}
         Note: Avoid using git-rebase on this commit`);
   }
   return PASS;

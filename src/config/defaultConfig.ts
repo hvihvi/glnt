@@ -35,7 +35,8 @@ const defaultConfig: Config = {
     pattern: "origin/*"
   },
   shouldNotBeUsedByOthers: {
-    level: "INFO"
+    level: "INFO",
+    ignores: []
   }
 };
 

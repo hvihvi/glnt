@@ -11,5 +11,9 @@
   "shouldMergeWithOtherBranches": {
     "level": "INFO",
     "pattern": "origin/master"
+  },
+  "shouldNotBeUsedByOthers": {
+    "level": "INFO",
+    "ignores": ["origin/master"]
   }
 }

@@ -14,7 +14,11 @@ const applyRule = (rule: Rule) => async (
   }
 
   // run the rule (with its dedicated config)
-  const result: Result = await rule.apply(config[rule.name], commit);
+  const result: Result = await rule.apply(
+    config[rule.name],
+    commit,
+    config.origin
+  );
 
   if (!result) {
     // the rule didn't return any result, no results means no failure

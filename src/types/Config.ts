@@ -6,7 +6,7 @@ export interface Config {
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHavePatternsInMessage: PatternsConfig;
   shouldMergeWithOtherBranches: PatternConfig;
-  shouldNotBeUsedByOthers: RuleConfig;
+  shouldNotBeUsedByOthers: IgnoresConfig;
 }
 
 export interface RuleConfig {
@@ -29,6 +29,10 @@ export interface KeywordsConfig extends RuleConfig {
 
 export interface PatternsConfig extends RuleConfig {
   patterns: string[];
+}
+
+export interface IgnoresConfig extends RuleConfig {
+  ignores: string[];
 }
 
 export interface PatternConfig extends RuleConfig {
