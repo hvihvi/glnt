@@ -6,6 +6,7 @@ const name = "shouldNotBeUsedByOthers";
 
 const apply = async (config: RuleConfig, commit: string) => {
   const isUsedBy = await git.isUsedByBranches(commit);
+  // TODO filter common branches and remote self
   if (isUsedBy.length > 0) {
     return FAIL(`Other branches are using this commit : ${isUsedBy}
         Note: Avoid using git-rebase on this commit`);
