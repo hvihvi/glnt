@@ -4,15 +4,17 @@ A Linter for Git.
 
 Manual git verifications automated :
 
-- "Do I have conflict with anyone else?"
-- "Can I rebase my branch without bothering someone else?"
-- "Are my commit messages properly written?"
-- "Did I forget a TODO reminder, or to test something?"
-- ...
+> Do I have conflict with anyone else?
 
-`Glnt` takes a look at your history to answer these kind of questions automatically.
+> Can I rebase my branch without bothering someone else?
 
-It can be used to self check, facilitate code reviews, enforce rules surrounding git in a team/project, provide feedbacks via CI tools...
+> Are my commit messages properly written?
+
+> Did I forget a TODO reminder, to tag an ISSUE, or to test something?
+
+**Glnt** takes a look at your git history to answer these questions automatically.
+
+It can be used to facilitate code reviews, enforce rules surrounding git in a team/project, provide feedbacks via CI tools...
 
 # Installation
 
