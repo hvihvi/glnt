@@ -14,7 +14,13 @@ const loadConfig = async (): Promise<Config> => {
   if (!existsSync(filename)) {
     const createdConfig = await createConfig.run();
     writeFileSync(filename, JSON.stringify(createdConfig));
-    console.log(chalk.green("\nconfig file created at " + filename));
+    console.log(
+      chalk.green("\nconfig file created at " + filename) +
+        chalk.grey(
+          "\nCommit the file to enforce these rules, or add it to .gitignore to keep it personnal." +
+            "\nRun glnt again when you're done to run verifications."
+        )
+    );
     process.exit(0);
   }
   const loadedConfig = JSON.parse(readFileSync(filename, "utf8"));
