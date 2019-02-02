@@ -1,6 +1,5 @@
 import git from "../git";
 import { KeywordsConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 // TODO rename rule to shouldHaveNoKeywordsInAddedDiffs
@@ -23,7 +22,6 @@ const apply = async (config: KeywordsConfig, commit: string) => {
         content: `Diff content should not contain any of the following forbidden keywords : ${
           config.keywords
         }`,
-        level: toLevel(config.level),
         commit
       }
     };

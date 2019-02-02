@@ -1,6 +1,5 @@
 import git from "../git";
 import { RuleConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldHaveSeparatorLine";
@@ -18,7 +17,6 @@ const apply = async (config: RuleConfig, commit: string) => {
       pass: false,
       message: {
         content: `Commit message should have a separator line between header and body`,
-        level: toLevel(config.level),
         commit
       }
     };

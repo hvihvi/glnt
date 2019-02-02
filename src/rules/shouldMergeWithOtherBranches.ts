@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import git from "../git";
 import { PatternConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Apply, PASS, Rule } from "../types/Rule";
 
 const name = "shouldMergeWithOtherBranches";
@@ -10,8 +9,7 @@ const FAIL_WORKDIR = (level: string) => {
   return {
     pass: false,
     message: {
-      content: "Git working directory must be clean to perform merge checks",
-      level: toLevel(level)
+      content: "Git working directory must be clean to perform merge checks"
     }
   };
 };
@@ -20,8 +18,7 @@ const FAIL_CONFLICT = (conflictBranches: string[], level: string) => {
   return {
     pass: false,
     message: {
-      content: `Current HEAD has conflict with other branches: ${conflictBranches}`,
-      level: toLevel(level)
+      content: `Current HEAD has conflict with other branches: ${conflictBranches}`
     }
   };
 };

@@ -1,13 +1,14 @@
 import logger from "../logger";
 import { Config } from "../types/Config";
-import { Level } from "../types/Level";
-import { PASS, Result, Rule } from "../types/Rule";
+import { Level, toLevel } from "../types/Level";
+import { PASS, Result, ResultWithLevel, Rule } from "../types/Rule";
 
 const applyRule = (rule: Rule) => async (
   config: Config,
   ...args: any
-): Promise<Result> => {
-  if (config[rule.name].level === Level.DISABLED) {
+): Promise<ResultWithLevel> => {
+  const level = toLevel(config[rule.name].level);
+  if (level === Level.DISABLED) {
     // rule is disabled or doesn't exist, don't run the rule
     return PASS;
   }
@@ -20,9 +21,9 @@ const applyRule = (rule: Rule) => async (
     return PASS;
   }
   if (!result.pass) {
-    logger.logMessage(result.message.level, result.message, rule);
+    logger.logMessage(level, result.message, rule);
   }
-  return result;
+  return { ...result, level };
 };
 
 export default { applyRule };

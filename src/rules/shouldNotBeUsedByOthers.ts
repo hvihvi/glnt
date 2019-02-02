@@ -1,6 +1,5 @@
 import git from "../git";
 import { RuleConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldNotBeUsedByOthers";
@@ -13,7 +12,6 @@ const apply = async (config: RuleConfig, commit: string) => {
       message: {
         content: `Other branches are using this commit : ${isUsedBy}
         Note: Avoid using git-rebase on this commit`,
-        level: toLevel(config.level),
         commit
       }
     };

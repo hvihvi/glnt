@@ -1,7 +1,6 @@
 import { match } from "minimatch";
 import git from "../git";
 import { PatternsConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 import util from "../util";
 
@@ -21,7 +20,6 @@ const apply = async (config: PatternsConfig, commit: string) => {
         content: `Commit message should match one of the following patterns : ${
           config.patterns
         }`,
-        level: toLevel(config.level),
         commit
       }
     };

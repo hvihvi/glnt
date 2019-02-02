@@ -1,6 +1,5 @@
 import git from "../git";
 import { CharPerLineConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldHaveNCharPerLine";
@@ -23,7 +22,6 @@ const apply = async (config: CharPerLineConfig, commit: string) => {
         content: `Commit message should be wrapped to ${
           config.charactersPerLine
         }char per lines`,
-        level: toLevel(config.level),
         commit
       }
     };

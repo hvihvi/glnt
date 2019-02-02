@@ -1,7 +1,6 @@
 import minimatch = require("minimatch");
 import git from "../git";
 import { ShouldHaveTestsConfig } from "../types/Config";
-import { toLevel } from "../types/Level";
 import { Rule } from "../types/Rule";
 
 const name = "shouldHaveTests";
@@ -39,7 +38,6 @@ const apply = async (config: ShouldHaveTestsConfig, commit: string) => {
         Note: Tag your commit message with [${
           config.skipTags
         }] to bypass this rule`,
-        level: toLevel(config.level),
         commit
       }
     };

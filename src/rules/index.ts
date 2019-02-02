@@ -3,7 +3,7 @@ import git from "../git";
 import logger from "../logger";
 import { Config } from "../types/Config";
 import { Level } from "../types/Level";
-import { Result } from "../types/Rule";
+import { Result, ResultWithLevel } from "../types/Rule";
 import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
 import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
 import shouldHavePatternsInMessage from "./shouldHavePatternsInMessage";
@@ -25,18 +25,18 @@ const applyRules = async () => {
   const commits = await git.listCommits(base, "HEAD");
 
   // collect per commit rules
-  const commitResults: Result[] = await Promise.all(
+  const commitResults: ResultWithLevel[] = await Promise.all(
     commits.map(commit => applyCommitRules(commit, config))
   ).then(array => [].concat.apply([], array)); // Equivalent to array.flat TODO util func
   // collect HEAD rules
-  const headResults: Result[] = await applyHeadRules(config);
+  const headResults: ResultWithLevel[] = await applyHeadRules(config);
 
   // merge all results
   const results = [...commitResults, ...headResults];
 
   // exit process with 1 if any rule maked as ERROR don't pass, 0 otherwise
   const exitCode = results.some(
-    result => !result.pass && result.message.level === Level.ERROR
+    result => !result.pass && result.level === Level.ERROR
   );
   exitCode ? logger.fail() : logger.success();
   process.exit(exitCode ? 1 : 0);
