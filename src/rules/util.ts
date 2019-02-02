@@ -4,8 +4,8 @@ import { Level, toLevel } from "../types/Level";
 import { PASS, Result, ResultWithLevel, Rule } from "../types/Rule";
 
 const applyRule = (rule: Rule) => async (
-  config: Config,
-  ...args: any
+  config?: Config,
+  commit?: string
 ): Promise<ResultWithLevel> => {
   const level = toLevel(config[rule.name].level);
   if (level === Level.DISABLED) {
@@ -14,14 +14,14 @@ const applyRule = (rule: Rule) => async (
   }
 
   // run the rule (with its dedicated config)
-  const result: Result = await rule.apply(config[rule.name], ...args);
+  const result: Result = await rule.apply(config[rule.name], commit);
 
   if (!result) {
     // the rule didn't return any result, no results means no failure
     return PASS;
   }
   if (!result.pass) {
-    logger.logMessage(level, result.message, rule);
+    logger.logMessage(level, result.message, rule, commit);
   }
   return { ...result, level };
 };

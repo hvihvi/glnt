@@ -1,6 +1,6 @@
 import git from "../git";
 import { CharPerLineConfig } from "../types/Config";
-import { Rule } from "../types/Rule";
+import { FAIL, PASS, Rule } from "../types/Rule";
 
 const name = "shouldHaveNCharPerLine";
 
@@ -16,17 +16,13 @@ export const hasMoreThanNCharPerLine = (
 const apply = async (config: CharPerLineConfig, commit: string) => {
   const msg = await git.getCommitMessage(commit);
   if (hasMoreThanNCharPerLine(msg, config.charactersPerLine)) {
-    return {
-      pass: false,
-      message: {
-        content: `Commit message should be wrapped to ${
-          config.charactersPerLine
-        }char per lines`,
-        commit
-      }
-    };
+    return FAIL(
+      `Commit message should be wrapped to ${
+        config.charactersPerLine
+      }char per lines`
+    );
   } else {
-    return { pass: true };
+    return PASS;
   }
 };
 const rule: Rule = { name, apply };

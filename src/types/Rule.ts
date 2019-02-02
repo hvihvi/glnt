@@ -1,11 +1,10 @@
 import { Level } from "./Level";
-import { Message } from "./Message";
 
 export type Apply = (...args: any[]) => Promise<Result>;
 
 export interface Result {
   pass: boolean;
-  message?: Message;
+  message?: string;
 }
 
 export interface ResultWithLevel extends Result {
@@ -14,7 +13,7 @@ export interface ResultWithLevel extends Result {
 
 export const PASS: Result = { pass: true };
 
-export const FAIL = (message: Message): Result => {
+export const FAIL = (message: string): Result => {
   return { pass: false, message };
 };
 

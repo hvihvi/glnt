@@ -1,32 +1,14 @@
 import chalk from "chalk";
 import git from "../git";
 import { PatternConfig } from "../types/Config";
-import { Apply, PASS, Rule } from "../types/Rule";
+import { Apply, FAIL, PASS, Rule } from "../types/Rule";
 
 const name = "shouldMergeWithOtherBranches";
-
-const FAIL_WORKDIR = (level: string) => {
-  return {
-    pass: false,
-    message: {
-      content: "Git working directory must be clean to perform merge checks"
-    }
-  };
-};
-
-const FAIL_CONFLICT = (conflictBranches: string[], level: string) => {
-  return {
-    pass: false,
-    message: {
-      content: `Current HEAD has conflict with other branches: ${conflictBranches}`
-    }
-  };
-};
 
 const apply: Apply = async (config: PatternConfig) => {
   const isCleanWorkDir = await git.isCleanWorkDir();
   if (!isCleanWorkDir) {
-    return FAIL_WORKDIR(config.level);
+    return FAIL("Git working directory must be clean to perform merge checks");
   }
   const branches: string[] = await git.listRemoteBranches(config.pattern);
   const conflictBranches = [];
@@ -38,7 +20,9 @@ const apply: Apply = async (config: PatternConfig) => {
     }
   }
   if (conflictBranches.length > 0) {
-    return FAIL_CONFLICT(conflictBranches, config.level);
+    return FAIL(
+      `Current HEAD has conflict with other branches: ${conflictBranches}`
+    );
   }
   return PASS;
 };

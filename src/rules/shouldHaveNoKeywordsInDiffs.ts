@@ -1,6 +1,6 @@
 import git from "../git";
 import { KeywordsConfig } from "../types/Config";
-import { Rule } from "../types/Rule";
+import { FAIL, PASS, Rule } from "../types/Rule";
 
 // TODO rename rule to shouldHaveNoKeywordsInAddedDiffs
 const name = "shouldHaveNoKeywordsInDiffs";
@@ -16,17 +16,13 @@ export const hasKeywordsInDiff = (diffs: string[], keywords: string[]) =>
 const apply = async (config: KeywordsConfig, commit: string) => {
   const diffs = await git.getCommitDiff(commit);
   if (hasKeywordsInDiff(diffs, config.keywords)) {
-    return {
-      pass: false,
-      message: {
-        content: `Diff content should not contain any of the following forbidden keywords : ${
-          config.keywords
-        }`,
-        commit
-      }
-    };
+    return FAIL(
+      `Diff content should not contain any of the following forbidden keywords : ${
+        config.keywords
+      }`
+    );
   } else {
-    return { pass: true };
+    return PASS;
   }
 };
 

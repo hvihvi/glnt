@@ -1,7 +1,7 @@
 import minimatch = require("minimatch");
 import git from "../git";
 import { ShouldHaveTestsConfig } from "../types/Config";
-import { Rule } from "../types/Rule";
+import { FAIL, PASS, Rule } from "../types/Rule";
 
 const name = "shouldHaveTests";
 
@@ -31,18 +31,12 @@ const apply = async (config: ShouldHaveTestsConfig, commit: string) => {
     !hasSkipTag(message, config.skipTags) &&
     hasMissingTests(filenames, config)
   ) {
-    return {
-      pass: false,
-      message: {
-        content: `You modified source files without modifying a test. Is a test missing? ಠ_ರೃ
+    return FAIL(`You modified source files without modifying a test. Is a test missing?
         Note: Tag your commit message with [${
           config.skipTags
-        }] to bypass this rule`,
-        commit
-      }
-    };
+        }] to bypass this rule`);
   } else {
-    return { pass: true };
+    return PASS;
   }
 };
 

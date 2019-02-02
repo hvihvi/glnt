@@ -1,7 +1,6 @@
 import chalk from "chalk";
 import git from "../git";
 import { Level } from "../types/Level";
-import { Message } from "../types/Message";
 import { Rule } from "../types/Rule";
 
 const log = (message: string, level: Level, name: string) => {
@@ -18,12 +17,17 @@ const log = (message: string, level: Level, name: string) => {
 };
 
 // TODO rename as log, and hide old log as implementation detail
-const logMessage = (level: Level, message: Message, rule: Rule) => {
-  if (message.commit) {
-    logWithSha1(message.content, level, rule.name, message.commit);
+const logMessage = (
+  level: Level,
+  message: string,
+  rule: Rule,
+  commit?: string
+) => {
+  if (commit) {
+    logWithSha1(message, level, rule.name, commit);
   } else {
     // TODO fix toString followed by toLevel...
-    log(message.content, level, rule.name);
+    log(message, level, rule.name);
   }
 };
 
