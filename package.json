@@ -51,7 +51,6 @@
   "dependencies": {
     "@types/minimatch": "^3.0.3",
     "@types/node": "^10.12.18",
-    "@types/prompts": "^1.2.0",
     "chalk": "^2.4.1",
     "find-project-root": "^1.1.1",
     "minimatch": "^3.0.4",

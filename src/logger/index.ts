@@ -70,10 +70,6 @@ const success = () =>
  */
 const fail = () => console.log(chalk.red("\nFail! Please fix errors above\n"));
 
-const logMissingConfig = () => {
-  console.log(chalk.red.underline("No .glntrc.json config file found"));
-};
-
 const logMissingMaster = (ref: string) => {
   console.log(
     chalk.redBright(`The branch `) +
@@ -90,6 +86,5 @@ export default {
   fail,
   info,
   error,
-  logMissingConfig,
   logMissingMaster
 };
