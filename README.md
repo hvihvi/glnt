@@ -37,7 +37,9 @@ glnt
 ```
 
 The first usage will help you in creating your configuration if it doesn't already exist.
-Once you're done, run it again to run verifications:
+![](setup_conf.gif)
+
+When you're done, run it again to run verifications:
 
 ![](log_example.png)
 
