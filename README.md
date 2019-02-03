@@ -41,7 +41,7 @@ The first usage will help you in creating your configuration if it doesn't alrea
 
 When you're done, run it again to run verifications:
 
-![](log_example.png)
+![](run_glnt.png)
 
 Outputs warning or error messages to the console if any rules applied to your git history are broken.
 
