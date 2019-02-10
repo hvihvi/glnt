@@ -40,23 +40,15 @@ const run = async () => {
     return { ...defaultConfig, origin };
   }
 
-  const shouldNotBeUsedByOthers = await configureShouldNotBeUsedByOthers(
-    RuleName.NOT_USED_BY_OTHERS
-  );
+  const shouldNotBeUsedByOthers = await configureShouldNotBeUsedByOthers();
 
-  const shouldHaveNCharPerLine = await configureShouldHaveNCharPerLine(
-    RuleName.N_CHAR_PER_LINE
-  );
+  const shouldHaveNCharPerLine = await configureShouldHaveNCharPerLine();
 
-  const shouldHaveSeparatorLine = await configureShouldHaveSeparatorLine(
-    RuleName.SEPARATOR_LINE
-  );
+  const shouldHaveSeparatorLine = await configureShouldHaveSeparatorLine();
 
-  const shouldMergeWithOtherBranches = await configureShouldMergeWithOtherBranches(
-    RuleName.MERGE
-  );
+  const shouldMergeWithOtherBranches = await configureShouldMergeWithOtherBranches();
 
-  const shouldHaveTests = await configureShouldHaveTests("shouldHaveTests");
+  const shouldHaveTests = await configureShouldHaveTests();
 
   const config: Config = {
     ...defaultConfig,
@@ -88,9 +80,9 @@ const configureLevel = async (ruleName: string, desc: string) => {
   return level;
 };
 
-const configureShouldHaveNCharPerLine = async (ruleName: string) => {
+const configureShouldHaveNCharPerLine = async () => {
   const level = await configureLevel(
-    ruleName,
+    RuleName.N_CHAR_PER_LINE,
     "Checks if commit messages are wrapped to a certain amount of character per line (recommend 72 to ease readability with most tools)"
   );
   if (level === "DISABLED") {
@@ -98,32 +90,32 @@ const configureShouldHaveNCharPerLine = async (ruleName: string) => {
   }
   const charactersPerLine = await prompts.number({
     type: "number",
-    name: ruleName + "CharactersPerLine",
+    name: RuleName.N_CHAR_PER_LINE + "CharactersPerLine",
     message: "Characters per line :",
     initial: 72
   });
   return { level, charactersPerLine };
 };
 
-const configureShouldNotBeUsedByOthers = async (ruleName: string) => {
+const configureShouldNotBeUsedByOthers = async () => {
   const level = await configureLevel(
-    ruleName,
+    RuleName.NOT_USED_BY_OTHERS,
     "Checks if any other remote branches use your commits (useful to check wether it's safe to use git-rebase for example)"
   );
   return { level, ignores: [] };
 };
 
-const configureShouldHaveSeparatorLine = async (ruleName: string) => {
+const configureShouldHaveSeparatorLine = async () => {
   const level = await configureLevel(
-    ruleName,
+    RuleName.SEPARATOR_LINE,
     "Checks if commit messages have a blank line between header and body (recommended for certain tools)"
   );
   return { level };
 };
 
-const configureShouldMergeWithOtherBranches = async (ruleName: string) => {
+const configureShouldMergeWithOtherBranches = async () => {
   const level = await configureLevel(
-    ruleName,
+    RuleName.MERGE,
     "Check if the current branch merges with other branches that match a pattern"
   );
   if (level === "DISABLED") {
@@ -131,30 +123,30 @@ const configureShouldMergeWithOtherBranches = async (ruleName: string) => {
   }
   const pattern = await prompts.text({
     type: "text",
-    name: ruleName + "Pattern",
+    name: RuleName.MERGE + "Pattern",
     message: "Pattern :",
     initial: "origin/*"
   });
   return { level, pattern };
 };
 
-const configureShouldHaveTests = async (ruleName: string) => {
+const configureShouldHaveTests = async () => {
   const level = await configureLevel(
-    ruleName,
-    "Check if commits that includes code modification also includes tests, or explains in commit message the reason for not having one"
+    RuleName.TESTS,
+    "Check if commits that include code modification also include tests, or explain in commit message the reason for not having one"
   );
   if (level === "DISABLED") {
     return { level, subject: "", test: "", skipTags: [] };
   }
   const subject = await prompts.text({
     type: "text",
-    name: ruleName + "Subject",
+    name: RuleName.TESTS + "Subject",
     message: "Blob pattern for code files :",
     initial: "**/*.js"
   });
   const test = await prompts.text({
     type: "text",
-    name: ruleName + "Test",
+    name: RuleName.TESTS + "Test",
     message: "Blob pattern for test files :",
     initial: "**/*.test.js"
   });
