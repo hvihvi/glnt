@@ -1,8 +1,6 @@
 import git from "../git";
 import { RuleConfig } from "../types/Config";
-import { FAIL, PASS, Rule } from "../types/Rule";
-
-const name = "shouldHaveSeparatorLine";
+import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
 
 // Visible for testing
 export const hasNoSeparatorLine = (msg: string) => {
@@ -20,6 +18,6 @@ const apply = async (config: RuleConfig, commit: string) => {
   return PASS;
 };
 
-const rule: Rule = { name, apply };
+const rule: Rule = { name: RuleName.SEPARATOR_LINE, apply };
 
 export default rule;

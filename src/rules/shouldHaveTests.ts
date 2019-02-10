@@ -1,9 +1,7 @@
 import minimatch = require("minimatch");
 import git from "../git";
 import { ShouldHaveTestsConfig } from "../types/Config";
-import { FAIL, PASS, Rule } from "../types/Rule";
-
-const name = "shouldHaveTests";
+import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
 
 // Visible for testing
 export const countMatchingFiles = (filenames: string[], pattern: string) => {
@@ -40,6 +38,6 @@ const apply = async (config: ShouldHaveTestsConfig, commit: string) => {
   }
 };
 
-const rule: Rule = { name, apply };
+const rule: Rule = { name: RuleName.TESTS, apply };
 
 export default rule;

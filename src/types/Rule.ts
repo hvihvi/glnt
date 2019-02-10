@@ -21,3 +21,13 @@ export interface Rule {
   name: string;
   apply: Apply;
 }
+
+export enum RuleName {
+  N_CHAR_PER_LINE = "shouldHaveNCharPerLine",
+  NO_KEYWORDS_IN_DIFF = "shouldHaveNoKeywordsInDiffs",
+  PATTERN_IN_MSG = "shouldHavePatternsInMessage",
+  SEPARATOR_LINE = "shouldHaveSeparatorLine",
+  TESTS = "shouldHaveTests",
+  MERGE = "shouldMergeWithOtherBranches",
+  NOT_USED_BY_OTHERS = "shouldNotBeUsedByOthers"
+}

@@ -1,8 +1,6 @@
 import git from "../git";
 import { CharPerLineConfig } from "../types/Config";
-import { FAIL, PASS, Rule } from "../types/Rule";
-
-const name = "shouldHaveNCharPerLine";
+import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
 
 // Visible for testing
 export const hasMoreThanNCharPerLine = (
@@ -25,6 +23,6 @@ const apply = async (config: CharPerLineConfig, commit: string) => {
     return PASS;
   }
 };
-const rule: Rule = { name, apply };
+const rule: Rule = { name: RuleName.N_CHAR_PER_LINE, apply };
 
 export default rule;

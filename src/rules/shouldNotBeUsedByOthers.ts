@@ -1,8 +1,6 @@
 import git from "../git";
 import { IgnoresConfig } from "../types/Config";
-import { FAIL, PASS, Rule } from "../types/Rule";
-
-const name = "shouldNotBeUsedByOthers";
+import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
 
 // Visible for Testing
 export const users = (
@@ -23,6 +21,6 @@ const apply = async (config: IgnoresConfig, commit: string, origin: string) => {
   return PASS;
 };
 
-const rule: Rule = { name, apply };
+const rule: Rule = { name: RuleName.NOT_USED_BY_OTHERS, apply };
 
 export default rule;

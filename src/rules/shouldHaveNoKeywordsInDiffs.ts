@@ -1,9 +1,6 @@
 import git from "../git";
 import { KeywordsConfig } from "../types/Config";
-import { FAIL, PASS, Rule } from "../types/Rule";
-
-// TODO rename rule to shouldHaveNoKeywordsInAddedDiffs
-const name = "shouldHaveNoKeywordsInDiffs";
+import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
 
 // Visible for testing
 export const hasKeywordsInDiff = (diffs: string[], keywords: string[]) =>
@@ -26,6 +23,7 @@ const apply = async (config: KeywordsConfig, commit: string) => {
   }
 };
 
-const rule: Rule = { name, apply };
+// TODO rename rule to shouldHaveNoKeywordsInAddedDiffs
+const rule: Rule = { name: RuleName.NO_KEYWORDS_IN_DIFF, apply };
 
 export default rule;

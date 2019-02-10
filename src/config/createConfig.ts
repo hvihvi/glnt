@@ -2,6 +2,7 @@ import { prompts } from "prompts";
 import { Config } from "../types/Config";
 import defaultConfig from "./defaultConfig";
 import chalk from "chalk";
+import { RuleName } from "../types/Rule";
 
 const run = async () => {
   console.log(chalk.red.bold.underline("No .glntrc.json config file found"));
@@ -40,19 +41,19 @@ const run = async () => {
   }
 
   const shouldNotBeUsedByOthers = await configureShouldNotBeUsedByOthers(
-    "shouldNotBeUsedByOthers"
+    RuleName.NOT_USED_BY_OTHERS
   );
 
   const shouldHaveNCharPerLine = await configureShouldHaveNCharPerLine(
-    "shouldHaveNCharPerLine"
+    RuleName.N_CHAR_PER_LINE
   );
 
   const shouldHaveSeparatorLine = await configureShouldHaveSeparatorLine(
-    "shouldHaveSeparatorLine"
+    RuleName.SEPARATOR_LINE
   );
 
   const shouldMergeWithOtherBranches = await configureShouldMergeWithOtherBranches(
-    "shouldMergeWithOtherBranches"
+    RuleName.MERGE
   );
 
   const shouldHaveTests = await configureShouldHaveTests("shouldHaveTests");
