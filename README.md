@@ -14,7 +14,7 @@ Manual git verifications automated :
 
 **Glnt** takes a look at your git history to answer these questions automatically.
 
-It can be used to facilitate code reviews, enforce rules surrounding git in a team/project, provide feedbacks via CI tools...
+It can be used to facilitate code reviews, enforce rules surrounding git in a team/project, provide automated feedbacks via CI tools or git hooks...
 
 # Installation
 
@@ -67,7 +67,7 @@ All rules can be set to "DISABLED", "INFO" or "ERROR".
 - `level: "INFO"`: the rule will display an informative message, but the script won't exit in an error
 - `level: "ERROR"`: the rule will display an error message, and the script will exit with an error code (not 0, TODO implement exit code)
 
-**For script use and CI:** Exits with error code 1 if any rule configured with `"level": "ERROR"` do not pass the verification, exits with 0 otherwise.
+**For script use, git hooks and CI:** Exits with error code 1 if any rule configured with `"level": "ERROR"` do not pass the verification, exits with 0 otherwise.
 
 # Rules available
 
