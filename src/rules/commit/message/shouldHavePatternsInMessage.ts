@@ -1,8 +1,8 @@
 import { match } from "minimatch";
-import git from "../git";
-import { PatternsConfig } from "../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
-import util from "../util";
+import git from "../../../git";
+import { PatternsConfig } from "../../../types/Config";
+import { FAIL, PASS, Rule, RuleName } from "../../../types/Rule";
+import util from "../../../util";
 
 // Visible for testing
 export const messageMatchesPattern = (msg: string, patterns: string[]) => {

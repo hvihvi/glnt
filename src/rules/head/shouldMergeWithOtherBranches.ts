@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import git from "../git";
-import { PatternConfig } from "../types/Config";
-import { Apply, FAIL, PASS, Rule, RuleName } from "../types/Rule";
+import git from "../../git";
+import { PatternConfig } from "../../types/Config";
+import { Apply, FAIL, PASS, Rule, RuleName } from "../../types/Rule";
 
 const apply: Apply = async (config: PatternConfig) => {
   const isCleanWorkDir = await git.isCleanWorkDir();

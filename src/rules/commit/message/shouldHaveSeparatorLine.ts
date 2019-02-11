@@ -1,6 +1,6 @@
-import git from "../git";
-import { RuleConfig } from "../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
+import git from "../../../git";
+import { RuleConfig } from "../../../types/Config";
+import { FAIL, PASS, Rule, RuleName } from "../../../types/Rule";
 
 // Visible for testing
 export const hasNoSeparatorLine = (msg: string) => {

@@ -1,5 +1,5 @@
 import { messageStartsWithUpperCase } from "./shouldStartMessageWithUpperCase";
-import git from "../git";
+import git from "../../../git";
 
 it("should return true if uppercase", () => {
   // given

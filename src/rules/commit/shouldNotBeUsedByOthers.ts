@@ -1,6 +1,6 @@
-import git from "../git";
-import { IgnoresConfig } from "../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
+import git from "../../git";
+import { IgnoresConfig } from "../../types/Config";
+import { FAIL, PASS, Rule, RuleName } from "../../types/Rule";
 
 // Visible for Testing
 export const users = (

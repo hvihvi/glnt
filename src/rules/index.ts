@@ -4,14 +4,14 @@ import logger from "../logger";
 import { Config } from "../types/Config";
 import { Level } from "../types/Level";
 import { Result, ResultWithLevel } from "../types/Rule";
-import shouldHaveNCharPerLine from "./shouldHaveNCharPerLine";
-import shouldHaveNoKeywordsInDiffs from "./shouldHaveNoKeywordsInDiffs";
-import shouldHavePatternsInMessage from "./shouldHavePatternsInMessage";
-import shouldHaveSeparatorLine from "./shouldHaveSeparatorLine";
-import shouldHaveTests from "./shouldHaveTests";
-import shouldMergeWithOtherBranches from "./shouldMergeWithOtherBranches";
-import shouldNotBeUsedByOthers from "./shouldNotBeUsedByOthers";
-import shouldStartMessageWithUpperCase from "./shouldStartMessageWithUpperCase";
+import shouldHaveNCharPerLine from "./commit/message/shouldHaveNCharPerLine";
+import shouldHaveNoKeywordsInDiffs from "./commit/shouldHaveNoKeywordsInDiffs";
+import shouldHavePatternsInMessage from "./commit/message/shouldHavePatternsInMessage";
+import shouldHaveSeparatorLine from "./commit/message/shouldHaveSeparatorLine";
+import shouldHaveTests from "./commit/shouldHaveTests";
+import shouldMergeWithOtherBranches from "./head/shouldMergeWithOtherBranches";
+import shouldNotBeUsedByOthers from "./commit/shouldNotBeUsedByOthers";
+import shouldStartMessageWithUpperCase from "./commit/message/shouldStartMessageWithUpperCase";
 import util from "./util";
 
 const applyRules = async () => {

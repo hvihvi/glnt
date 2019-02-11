@@ -1,7 +1,7 @@
 import minimatch = require("minimatch");
-import git from "../git";
-import { ShouldHaveTestsConfig } from "../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../types/Rule";
+import git from "../../git";
+import { ShouldHaveTestsConfig } from "../../types/Config";
+import { FAIL, PASS, Rule, RuleName } from "../../types/Rule";
 
 // Visible for testing
 export const countMatchingFiles = (filenames: string[], pattern: string) => {
