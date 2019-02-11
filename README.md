@@ -75,6 +75,7 @@ All rules can be set to "DISABLED", "INFO" or "ERROR".
 - [Should have tests](#should-have-tests)
 - [Should not contain keywords in commit patch](#should-not-contain-keywords-in-commit-patch)
 - [Should match patterns in commit message](#should-match-patterns-in-commit-message)
+- [Should match patterns in branch name](#should-match-patterns-in-branch-name)
 - [Should merge with other branches](#should-merge-with-other-branches)
 - [Should not contain merge commits](#should-not-contain-merge-commits)
 - [Should not be used by others](#should-not-be-used-by-others)
@@ -170,6 +171,25 @@ For each commits between `HEAD` and `origin` :
 - checks if the content of a commit contains "TODO" (configurable)
 
 For example you might want to avoid using, or be informed when using `null`, `TODO`, `console.log` (if you don't have a linter that already cover such rules)...
+
+## Should match patterns in branch name
+
+Example config :
+
+```json
+"shouldHavePatternsInBranchName": {
+  "level": "INFO",
+  "patterns": ["*AMX-*"]
+}
+```
+
+For current `HEAD`, looks for current branch and :
+
+- check if any of the patterns listed match the branch name. See [minimatch](https://www.npmjs.com/package/minimatch) for more info on pattern matching.
+
+Note: In detatched HEAD, branch name becomes "HEAD".
+
+For example, in feature branch workflows, you could require that a branch name matches an issue key.
 
 ## Should match patterns in commit message
 

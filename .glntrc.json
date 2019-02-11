@@ -1,19 +1,24 @@
 {
-  "origin": "HEAD~10",
-  "shouldHaveNoKeywordsInDiffs": {
+  "origin": "origin/master",
+  "shouldHaveTests": {
     "level": "INFO",
-    "keywords": ["TODO"]
+    "subject": "**/*.js",
+    "test": "**/*.test.js",
+    "skipTags": [
+      "#untested",
+      "#refacto",
+      "#refactoring",
+      "#iso",
+      "#trivial",
+      "#notest"
+    ]
   },
-  "shouldHavePatternsInMessage": {
-    "level": "DISABLED",
-    "patterns": ["*AMX-*", "*BUG-*"]
-  },
-  "shouldMergeWithOtherBranches": {
-    "level": "INFO",
-    "pattern": "origin/master"
-  },
-  "shouldNotBeUsedByOthers": {
-    "level": "INFO",
-    "ignores": ["origin/master"]
-  }
+  "shouldHaveNCharPerLine": { "level": "INFO", "charactersPerLine": 72 },
+  "shouldHaveSeparatorLine": { "level": "INFO" },
+  "shouldStartMessageWithUpperCase": { "level": "INFO" },
+  "shouldHaveNoKeywordsInDiffs": { "level": "INFO", "keywords": ["TODO"] },
+  "shouldHavePatternsInMessage": { "level": "INFO", "patterns": ["*AMX-*"] },
+  "shouldHavePatternsInBranchName": { "level": "INFO", "patterns": ["*AMX-*"] },
+  "shouldMergeWithOtherBranches": { "level": "INFO", "pattern": "origin/*" },
+  "shouldNotBeUsedByOthers": { "level": "INFO", "ignores": [] }
 }

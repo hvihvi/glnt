@@ -33,6 +33,10 @@ const defaultConfig: Config = {
     level: "INFO",
     patterns: []
   },
+  shouldHavePatternsInBranchName: {
+    level: "INFO",
+    patterns: []
+  },
   shouldMergeWithOtherBranches: {
     level: "INFO",
     pattern: "origin/*"

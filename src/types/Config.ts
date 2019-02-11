@@ -8,6 +8,7 @@ export interface Config {
   shouldHavePatternsInMessage: PatternsConfig;
   shouldMergeWithOtherBranches: PatternConfig;
   shouldNotBeUsedByOthers: IgnoresConfig;
+  shouldHavePatternsInBranchName: PatternsConfig;
 }
 
 export interface RuleConfig {

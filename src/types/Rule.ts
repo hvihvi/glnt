@@ -27,6 +27,7 @@ enum RuleName {
   N_CHAR_PER_LINE = "shouldHaveNCharPerLine",
   NO_KEYWORDS_IN_DIFF = "shouldHaveNoKeywordsInDiffs",
   PATTERN_IN_MSG = "shouldHavePatternsInMessage",
+  PATTERN_IN_BRANCH = "shouldHavePatternsInBranchName",
   SEPARATOR_LINE = "shouldHaveSeparatorLine",
   STARTS_WITH_UPPERCASE = "shouldStartMessageWithUpperCase",
   TESTS = "shouldHaveTests",
@@ -42,6 +43,7 @@ enum Desc {
   N_CHAR_PER_LINE = "Checks if commit messages are wrapped to a certain amount of character per line (recommended: 72)",
   NO_KEYWORDS_IN_DIFF = "",
   PATTERN_IN_MSG = "",
+  PATTERN_IN_BRANCH = "",
   SEPARATOR_LINE = "Checks if commit messages have a blank line between header and body (recommended for certain tools)",
   STARTS_WITH_UPPERCASE = "Checks if commit messages start with an uppercase",
   TESTS = "Check if commits that include code modification also include tests, or explain in commit message the reason for not having one",
@@ -81,5 +83,9 @@ export const Rules = {
   shouldNotBeUsedByOthers: {
     name: RuleName.NOT_USED_BY_OTHERS,
     desc: Desc.NOT_USED_BY_OTHERS
+  },
+  shouldHavePatternsInBranchName: {
+    name: RuleName.PATTERN_IN_BRANCH,
+    desc: Desc.PATTERN_IN_BRANCH
   }
 };

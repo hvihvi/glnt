@@ -6,6 +6,7 @@ import { Level } from "../types/Level";
 import { Result, ResultWithLevel } from "../types/Rule";
 import shouldHaveNCharPerLine from "./commit/message/shouldHaveNCharPerLine";
 import shouldHaveNoKeywordsInDiffs from "./commit/shouldHaveNoKeywordsInDiffs";
+import shouldHavePatternsInBranchName from "./head/shouldHavePatternsInBranchName";
 import shouldHavePatternsInMessage from "./commit/message/shouldHavePatternsInMessage";
 import shouldHaveSeparatorLine from "./commit/message/shouldHaveSeparatorLine";
 import shouldHaveTests from "./commit/shouldHaveTests";
@@ -77,7 +78,10 @@ const applyCommitRules = async (
  * Add rules that apply to HEAD here
  */
 const applyHeadRules = async (config: Config): Promise<Result[]> => {
-  return Promise.all([util.applyRule(shouldMergeWithOtherBranches)(config)]);
+  return Promise.all([
+    util.applyRule(shouldMergeWithOtherBranches)(config),
+    util.applyRule(shouldHavePatternsInBranchName)(config)
+  ]);
 };
 
 export default { applyRules };
