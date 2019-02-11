@@ -27,6 +27,7 @@ export enum RuleName {
   NO_KEYWORDS_IN_DIFF = "shouldHaveNoKeywordsInDiffs",
   PATTERN_IN_MSG = "shouldHavePatternsInMessage",
   SEPARATOR_LINE = "shouldHaveSeparatorLine",
+  STARTS_WITH_UPPERCASE = "shouldStartMessageWithUpperCase",
   TESTS = "shouldHaveTests",
   MERGE = "shouldMergeWithOtherBranches",
   NOT_USED_BY_OTHERS = "shouldNotBeUsedByOthers"

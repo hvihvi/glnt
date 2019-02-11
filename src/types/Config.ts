@@ -3,6 +3,7 @@ export interface Config {
   shouldHaveTests: ShouldHaveTestsConfig;
   shouldHaveNCharPerLine: CharPerLineConfig;
   shouldHaveSeparatorLine: RuleConfig;
+  shouldStartMessageWithUpperCase: RuleConfig;
   shouldHaveNoKeywordsInDiffs: KeywordsConfig;
   shouldHavePatternsInMessage: PatternsConfig;
   shouldMergeWithOtherBranches: PatternConfig;

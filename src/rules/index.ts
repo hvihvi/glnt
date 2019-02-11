@@ -11,6 +11,7 @@ import shouldHaveSeparatorLine from "./shouldHaveSeparatorLine";
 import shouldHaveTests from "./shouldHaveTests";
 import shouldMergeWithOtherBranches from "./shouldMergeWithOtherBranches";
 import shouldNotBeUsedByOthers from "./shouldNotBeUsedByOthers";
+import shouldStartMessageWithUpperCase from "./shouldStartMessageWithUpperCase";
 import util from "./util";
 
 const applyRules = async () => {
@@ -66,6 +67,7 @@ const applyCommitRules = async (
     util.applyRule(shouldHaveTests)(config, commit),
     util.applyRule(shouldHaveNoKeywordsInDiffs)(config, commit),
     util.applyRule(shouldHavePatternsInMessage)(config, commit),
+    util.applyRule(shouldStartMessageWithUpperCase)(config, commit),
     util.applyRule(shouldHaveSeparatorLine)(config, commit),
     util.applyRule(shouldNotBeUsedByOthers)(config, commit)
   ]);

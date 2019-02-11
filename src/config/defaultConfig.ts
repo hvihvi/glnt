@@ -22,6 +22,9 @@ const defaultConfig: Config = {
   shouldHaveSeparatorLine: {
     level: "INFO"
   },
+  shouldStartMessageWithUpperCase: {
+    level: "INFO"
+  },
   shouldHaveNoKeywordsInDiffs: {
     level: "INFO",
     keywords: []
