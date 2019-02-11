@@ -6,7 +6,7 @@ const exec = async (cmd: string) => {
   return stdout;
 };
 
-export const git = (cmd: string) => exec("git " + cmd);
+export const git = (cmd: string) => exec("git " + cmd).then(msg => msg.trim());
 
 export default {
   exec,
