@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import git from "../../git";
 import { PatternConfig } from "../../types/Config";
-import { Apply, FAIL, PASS, Rule, RuleName } from "../../types/Rule";
+import { Apply, FAIL, PASS, Rule, Rules } from "../../types/Rule";
 
 const apply: Apply = async (config: PatternConfig) => {
   const isCleanWorkDir = await git.isCleanWorkDir();
@@ -25,6 +25,6 @@ const apply: Apply = async (config: PatternConfig) => {
   return PASS;
 };
 
-const rule: Rule = { name: RuleName.MERGE, apply };
+const rule: Rule = { ...Rules.shouldMergeWithOtherBranches, apply };
 
 export default rule;

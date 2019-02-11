@@ -1,7 +1,7 @@
 import { match } from "minimatch";
 import git from "../../../git";
 import { PatternsConfig } from "../../../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../../../types/Rule";
+import { FAIL, PASS, Rule, Rules } from "../../../types/Rule";
 import util from "../../../util";
 
 // Visible for testing
@@ -27,6 +27,6 @@ const apply = async (config: PatternsConfig, commit: string) => {
   }
 };
 
-const rule: Rule = { name: RuleName.PATTERN_IN_MSG, apply };
+const rule: Rule = { ...Rules.shouldHavePatternsInMessage, apply };
 
 export default rule;

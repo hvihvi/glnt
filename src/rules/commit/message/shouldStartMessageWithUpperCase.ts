@@ -1,6 +1,6 @@
 import git from "../../../git";
 import { PatternsConfig } from "../../../types/Config";
-import { FAIL, PASS, Rule, RuleName } from "../../../types/Rule";
+import { FAIL, PASS, Rule, Rules } from "../../../types/Rule";
 
 // Visible for testing
 export const messageStartsWithUpperCase = (msg: string) => {
@@ -16,6 +16,6 @@ const apply = async (config: PatternsConfig, commit: string) => {
   }
 };
 
-const rule: Rule = { name: RuleName.STARTS_WITH_UPPERCASE, apply };
+const rule: Rule = { ...Rules.shouldStartMessageWithUpperCase, apply };
 
 export default rule;

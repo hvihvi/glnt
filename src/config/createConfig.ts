@@ -2,7 +2,7 @@ import { prompts } from "prompts";
 import { Config } from "../types/Config";
 import defaultConfig from "./defaultConfig";
 import chalk from "chalk";
-import { RuleName } from "../types/Rule";
+import { Rules } from "../types/Rule";
 
 const run = async () => {
   console.log(chalk.red.bold.underline("No .glntrc.json config file found"));
@@ -40,15 +40,17 @@ const run = async () => {
     return { ...defaultConfig, origin };
   }
 
-  const shouldNotBeUsedByOthers = await configureShouldNotBeUsedByOthers();
-
+  // ask for commit message rules
   const shouldHaveNCharPerLine = await configureShouldHaveNCharPerLine();
-
+  const shouldStartMessageWithUpperCase = await configureShouldStartMessageWithUpperCase();
   const shouldHaveSeparatorLine = await configureShouldHaveSeparatorLine();
 
-  const shouldMergeWithOtherBranches = await configureShouldMergeWithOtherBranches();
-
+  // ask for commit rules
+  const shouldNotBeUsedByOthers = await configureShouldNotBeUsedByOthers();
   const shouldHaveTests = await configureShouldHaveTests();
+
+  // ask for head rules
+  const shouldMergeWithOtherBranches = await configureShouldMergeWithOtherBranches();
 
   const config: Config = {
     ...defaultConfig,
@@ -57,18 +59,19 @@ const run = async () => {
     shouldHaveNCharPerLine,
     shouldHaveSeparatorLine,
     shouldMergeWithOtherBranches,
-    shouldNotBeUsedByOthers
+    shouldNotBeUsedByOthers,
+    shouldStartMessageWithUpperCase
   };
   return config;
 };
 
-const configureLevel = async (ruleName: string, desc: string) => {
+const configureLevel = async ({ name, desc }) => {
   console.log(
-    "\n" + chalk.cyanBright.bold.underline(ruleName) + chalk.bold(" " + desc)
+    "\n" + chalk.cyanBright.bold.underline(name) + chalk.bold(" " + desc)
   );
   const level = await prompts.select({
     type: "select",
-    name: ruleName + "Level",
+    name: name + "Level",
     message: "Select a level of criticity :",
     choices: [
       { title: "info", value: "INFO" },
@@ -81,16 +84,13 @@ const configureLevel = async (ruleName: string, desc: string) => {
 };
 
 const configureShouldHaveNCharPerLine = async () => {
-  const level = await configureLevel(
-    RuleName.N_CHAR_PER_LINE,
-    "Checks if commit messages are wrapped to a certain amount of character per line (recommend 72 to ease readability with most tools)"
-  );
+  const level = await configureLevel(Rules.shouldHaveNCharPerLine);
   if (level === "DISABLED") {
     return { level, charactersPerLine: 72 };
   }
   const charactersPerLine = await prompts.number({
     type: "number",
-    name: RuleName.N_CHAR_PER_LINE + "CharactersPerLine",
+    name: Rules.shouldHaveNCharPerLine.name + "CharactersPerLine",
     message: "Characters per line :",
     initial: 72
   });
@@ -98,32 +98,28 @@ const configureShouldHaveNCharPerLine = async () => {
 };
 
 const configureShouldNotBeUsedByOthers = async () => {
-  const level = await configureLevel(
-    RuleName.NOT_USED_BY_OTHERS,
-    "Checks if any other remote branches use your commits (useful to check wether it's safe to use git-rebase for example)"
-  );
+  const level = await configureLevel(Rules.shouldNotBeUsedByOthers);
   return { level, ignores: [] };
 };
 
+const configureShouldStartMessageWithUpperCase = async () => {
+  const level = await configureLevel(Rules.shouldStartMessageWithUpperCase);
+  return { level };
+};
+
 const configureShouldHaveSeparatorLine = async () => {
-  const level = await configureLevel(
-    RuleName.SEPARATOR_LINE,
-    "Checks if commit messages have a blank line between header and body (recommended for certain tools)"
-  );
+  const level = await configureLevel(Rules.shouldHaveSeparatorLine);
   return { level };
 };
 
 const configureShouldMergeWithOtherBranches = async () => {
-  const level = await configureLevel(
-    RuleName.MERGE,
-    "Check if the current branch merges with other branches that match a pattern"
-  );
+  const level = await configureLevel(Rules.shouldMergeWithOtherBranches);
   if (level === "DISABLED") {
     return { level, pattern: "" };
   }
   const pattern = await prompts.text({
     type: "text",
-    name: RuleName.MERGE + "Pattern",
+    name: Rules.shouldMergeWithOtherBranches.name + "Pattern",
     message: "Pattern :",
     initial: "origin/*"
   });
@@ -131,22 +127,19 @@ const configureShouldMergeWithOtherBranches = async () => {
 };
 
 const configureShouldHaveTests = async () => {
-  const level = await configureLevel(
-    RuleName.TESTS,
-    "Check if commits that include code modification also include tests, or explain in commit message the reason for not having one"
-  );
+  const level = await configureLevel(Rules.shouldHaveTests);
   if (level === "DISABLED") {
     return { level, subject: "", test: "", skipTags: [] };
   }
   const subject = await prompts.text({
     type: "text",
-    name: RuleName.TESTS + "Subject",
+    name: Rules.shouldHaveTests.name + "Subject",
     message: "Blob pattern for code files :",
     initial: "**/*.js"
   });
   const test = await prompts.text({
     type: "text",
-    name: RuleName.TESTS + "Test",
+    name: Rules.shouldHaveTests.name + "Test",
     message: "Blob pattern for test files :",
     initial: "**/*.test.js"
   });
