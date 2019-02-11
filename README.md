@@ -93,6 +93,9 @@ Default config :
   shouldHaveSeparatorLine: {
     "level": "INFO"
   },
+  shouldStartMessageWithUpperCase: {
+    "level": "INFO"
+  },
 ```
 
 For each commits between `HEAD` and `origin` :
@@ -102,6 +105,8 @@ For each commits between `HEAD` and `origin` :
   - Line separator between header and body
 
   - Character length per line of header and/or body
+
+  - Starts with upper case
 
 - TODO: Checks if the commit message does not contain tags (for example a commit message should not contain "WIP")
 
