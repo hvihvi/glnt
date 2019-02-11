@@ -18,7 +18,7 @@ export const FAIL = (message: string): Result => {
 };
 
 export interface Rule {
-  name: string;
+  name: RuleName;
   apply: Apply;
 }
 
